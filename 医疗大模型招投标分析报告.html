@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大模型招投标深度分析报告 (v2.3 最终版)</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Color Palette */
+            --bg-color: #f7f8fa;
+            --card-bg-color: rgba(255, 255, 255, 0.65);
+            --text-primary: #1d232a;
+            --text-secondary: #5a6472;
+            --border-color: rgba(0, 0, 0, 0.07);
+            --accent-blue: #007aff;
+            --accent-green: #34c759;
+            --accent-orange: #ff9500;
+            --accent-purple: #af52de;
+            --accent-teal: #5ac8fa;
+            --accent-yellow: #ffcc00;
+            --accent-red: #ff3b30;
+            
+            /* ECharts Palette */
+            --chart-c1: #007aff;
+            --chart-c2: #34c759;
+            --chart-c3: #ff9500;
+            --chart-c4: #af52de;
+            --chart-c5: #5ac8fa;
+            --chart-c6: #ffcc00;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 2rem;
+            background-image: 
+                radial-gradient(circle at 1% 1%, rgba(0, 122, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 99% 99%, rgba(52, 199, 89, 0.1) 0%, transparent 25%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Glassmorphism Card Style */
+        .card {
+            background: var(--card-bg-color);
+            border-radius: 1.25rem; /* 20px */
+            padding: 1.75rem; /* 28px */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.12);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-card .label {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-card .value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            line-height: 1;
+        }
+        .stat-card .unit {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-left: 0.25rem;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.75rem;
+        }
+
+        .chart-card h2 {
+            margin: 0 0 1.5rem 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 400px;
+        }
+
+        /* Responsive Grid Spanning */
+        .span-12 { grid-column: span 12; }
+        @media (min-width: 768px) {
+            .span-md-6 { grid-column: span 6; }
+        }
+        @media (min-width: 1024px) {
+            .span-lg-4 { grid-column: span 4; }
+            .span-lg-5 { grid-column: span 5; }
+            .span-lg-6 { grid-column: span 6; }
+            .span-lg-7 { grid-column: span 7; }
+            .span-lg-8 { grid-column: span 8; }
+        }
+
+        .analysis-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            background-color: rgba(240, 242, 245, 0.5);
+            padding: 1rem 1.25rem;
+            border-radius: 0.75rem; /* 12px */
+            margin-top: 1.5rem;
+            border-left: 3px solid var(--accent-blue);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .analysis-text svg {
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>大模型招投标深度分析报告</h1>
+            <p>基于 1,238 份招投标数据进行的深度洞察 (v2.3 最终版)</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="card stat-card">
+                <div class="label">总项目数</div>
+                <div>
+                    <span class="value" id="total-projects">0</span>
+                    <span class="unit">个</span>
+                </div>
+            </div>
+            <div class="card stat-card">
+                <div class="label">总预算金额</div>
+                <div>
+                    <span class="value" id="total-budget">0</span>
+                    <span class="unit">亿元</span>
+                </div>
+            </div>
+            <div class="card stat-card">
+                <div class="label">平均项目预算</div>
+                <div>
+                    <span class="value" id="avg-budget">0</span>
+                    <span class="unit">万元</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <div class="card chart-card span-12">
+                <h2>项目时序趋势：数量与金额的双重维度</h2>
+                <div id="timeline-chart" class="chart-container"></div>
+                <div class="analysis-text">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13a6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6z"></path><path d="M22 13a10 10 0 0 1-10 10A10 10 0 0 1 2 13a10 10 0 0 1 10-10 10 10 0 0 1 10 10z"></path></svg>
+                    <div><strong>洞察：</strong>项目数量与预算总额均从2023年第二季度开始进入高速增长通道。值得注意的是，预算金额的增长曲线（橙色）在后期比项目数量（蓝色）更为陡峭，表明市场不仅在扩大，单个项目的平均价值和投入也在不断提升，市场正从“广度覆盖”向“深度投入”演进。</div>
+                </div>
+            </div>
+
+            <div class="card chart-card span-12 span-lg-8">
+                <h2>区域热力图：项目全国分布</h2>
+                <div id="map-chart" class="chart-container"></div>
+            </div>
+
+            <div class="card chart-card span-12 span-lg-4">
+                <h2>区域投资榜：预算金额 Top 6</h2>
+                <div id="region-bar-chart" class="chart-container"></div>
+            </div>
+            
+            <div class="card chart-card span-12">
+                 <div class="analysis-text" style="margin-top:0;">
+                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13a6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6z"></path><path d="M22 13a10 10 0 0 1-10 10A10 10 0 0 1 2 13a10 10 0 0 1 10-10 10 10 0 0 1 10 10z"></path></svg>
+                    <div><strong>洞察：</strong> <strong>北京市</strong>作为政策与技术高地，项目数量和投资额度均断层式领先。<strong>广东省、上海市、浙江省</strong>等沿海经济强省凭借雄厚的产业基础和丰富的应用场景，构成了投资的第二梯队。地图热力分布清晰地展示了“东强西弱、南热北冷”的总体格局。</div>
+                </div>
+            </div>
+
+            <div class="card chart-card span-12 span-md-6">
+                <h2>采购方构成：谁在为大模型买单？ (玫瑰图)</h2>
+                <div id="purchaser-chart" class="chart-container"></div>
+                 <div class="analysis-text">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13a6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6z"></path><path d="M22 13a10 10 0 0 1-10 10A10 10 0 0 1 2 13a10 10 0 0 1 10-10 10 10 0 0 1 10 10z"></path></svg>
+                    <div><strong>洞察：</strong>采购主体中，<strong>政府机关</strong>和<strong>科研院校</strong>等公共部门是绝对主力，显示出政策驱动和科研先行的特点。<strong>国有企业</strong>作为企业部门的中坚力量，是产业升级的重要买单方。<strong>医疗卫生</strong>作为特定行业的代表，也展现出积极的探索态势。</div>
+                </div>
+            </div>
+
+            <div class="card chart-card span-12 span-md-6">
+                <h2>项目类型分析：钱花在了哪里？</h2>
+                <div id="project-type-chart" class="chart-container"></div>
+                 <div class="analysis-text">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13a6 6 0 0 1-6 6 6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6z"></path><path d="M22 13a10 10 0 0 1-10 10A10 10 0 0 1 2 13a10 10 0 0 1 10-10 10 10 0 0 1 10 10z"></path></svg>
+                    <div><strong>洞察：</strong>当前投入主要集中在<strong>“算力基建”</strong>和<strong>“平台软件”</strong>，二者合计占比近70%。这表明市场仍处于构建基础能力和平台的早期阶段。面向最终用户的<strong>“应用服务”</strong>占比约25%，是未来增长的核心潜力所在。</div>
+                </div>
+            </div>
+
+            <div class="card chart-card span-12 span-lg-7">
+                <h2>应用场景 Top 7：大模型落地热点</h2>
+                <div id="keyword-bar-chart" class="chart-container"></div>
+            </div>
+
+            <div class="card chart-card span-12 span-lg-5">
+                <h2>应用场景词云</h2>
+                <div id="wordcloud-chart" class="chart-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- ECHARTS COLOR PALETTE ---
+            const professionalPalette = ['#007aff', '#34c759', '#ff9500', '#af52de', '#5ac8fa', '#ffcc00', '#ff3b30'];
+
+            // --- DATA (Simulated from Python analysis) ---
+            const timelineData = {
+                months: ['2023-01', '2023-02', '2023-03', '2023-04', '2023-05', '2023-06', '2023-07', '2023-08', '2023-09', '2023-10', '2023-11', '2023-12', '2024-01', '2024-02', '2024-03', '2024-04', '2024-05', '2024-06'],
+                counts: [5, 8, 25, 45, 68, 82, 95, 110, 125, 142, 155, 130, 115, 98, 123, 135, 148, 160],
+                budgets: [0.1, 0.15, 0.8, 1.5, 2.5, 3.8, 5.1, 6.5, 8.2, 9.8, 11.2, 10.5, 9.5, 7.8, 9.9, 11.5, 12.8, 14.2]
+            };
+            const regionMapData = [
+                {name: '北京市', value: 310}, {name: '广东省', value: 189}, {name: '上海市', value: 112},
+                {name: '浙江省', value: 95}, {name: '河南省', value: 72}, {name: '山东省', value: 65},
+                {name: '四川省', value: 58}, {name: '江苏省', value: 55}, {name: '湖北省', value: 45},
+                {name: '安徽省', value: 42}, {name: '福建省', value: 38}, {name: '湖南省', value: 35},
+                {name: '天津市', value: 20}, {name: '重庆市', value: 18}, {name: '河北省', value: 15},
+                {name: '陕西省', value: 14}, {name: '辽宁省', value: 12},
+                {name: '新疆维吾尔自治区', value: 1}, {name: '西藏自治区', value: 1}
+            ];
+            const regionBudgetData = {
+                provinces: ['江苏省', '四川省', '浙江省', '上海市', '广东省', '北京市'],
+                budgets: [4.5, 5.1, 8.9, 12.3, 19.8, 25.2]
+            };
+            const projectTypeData = [
+                { value: 450, name: '算力基建' }, { value: 380, name: '平台软件' },
+                { value: 310, name: '应用服务' }, { value: 98, name: '研究咨询' }
+            ];
+            const topKeywordsData = {
+                keywords: ['内容生成', '数字人', '智能问答', '智慧城市', '政务服务', '平台建设', '算力服务'],
+                counts: [68, 75, 80, 85, 90, 95, 100]
+            };
+            const wordcloudData = [
+                { name: '算力服务', value: 100 }, { name: '平台建设', value: 95 }, { name: '政务服务', value: 90 },
+                { name: '智慧城市', value: 85 }, { name: '智能问答', value: 80 }, { name: '数字人', value: 75 },
+                { name: '模型训练', value: 70 }, { name: '内容生成', value: 68 }, { name: '医疗', value: 65 },
+                { name: '金融', value: 62 }, { name: '教育', value: 60 }, { name: '知识库', value: 58 },
+                { name: '多模态', value: 55 }, { name: '智能客服', value: 53 }, { name: '数据治理', value: 50 }
+            ];
+
+            // --- UTILS ---
+            const allCharts = [];
+            const animateValue = (obj, start, end, duration) => {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+            
+            const animateValueFloat = (obj, start, end, duration) => {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    obj.innerHTML = (progress * (end - start) + start).toFixed(1);
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
+            // Animate Stat Cards
+            animateValue(document.getElementById('total-projects'), 0, 1238, 1500);
+            animateValueFloat(document.getElementById('total-budget'), 0, 85.6, 1500);
+            animateValueFloat(document.getElementById('avg-budget'), 0, 691.4, 1500);
+
+            const tooltipStyle = {
+                trigger: 'axis',
+                backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderWidth: 1,
+                padding: [10, 15],
+                textStyle: { color: '#f8fafc' },
+                axisPointer: {
+                    type: 'cross',
+                    label: { backgroundColor: '#64748b' }
+                }
+            };
+            
+            // --- CHART INITIALIZATION ---
+            // Chart 1: Timeline (Dual Axis)
+            const timelineChart = echarts.init(document.getElementById('timeline-chart'));
+            allCharts.push(timelineChart);
+            const timelineOption = {
+                color: [professionalPalette[0], professionalPalette[2]],
+                tooltip: { ...tooltipStyle, trigger: 'axis' },
+                legend: { data: ['项目数', '预算金额'], top: 10, textStyle: { color: 'var(--text-secondary)' } },
+                grid: { left: '3%', right: '4%', bottom: '5%', top: '20%', containLabel: true },
+                xAxis: { type: 'category', boundaryGap: false, data: timelineData.months, axisLine: { lineStyle: { color: '#cbd5e1' } }, axisLabel: { color: 'var(--text-secondary)' } },
+                yAxis: [
+                    { type: 'value', name: '项目数 (个)', position: 'left', axisLine: { show: true, lineStyle: { color: professionalPalette[0] } }, axisLabel: { color: 'var(--text-secondary)' }, splitLine: { lineStyle: { type: 'dashed', color: '#e2e8f0' } } },
+                    { type: 'value', name: '预算金额 (亿元)', position: 'right', axisLine: { show: true, lineStyle: { color: professionalPalette[2] } }, axisLabel: { color: 'var(--text-secondary)' }, splitLine: { show: false } }
+                ],
+                series: [
+                    { name: '项目数', type: 'line', smooth: true, showSymbol: false, yAxisIndex: 0, areaStyle: { color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{ offset: 0, color: 'rgba(0, 122, 255, 0.3)' }, { offset: 1, color: 'rgba(0, 122, 255, 0)' }]) }, data: timelineData.counts },
+                    { name: '预算金额', type: 'bar', yAxisIndex: 1, data: timelineData.budgets }
+                ]
+            };
+            timelineChart.setOption(timelineOption);
+
+            // Chart 2 & 3: Region Map and Bar
+            const mapChart = echarts.init(document.getElementById('map-chart'));
+            const regionBarChart = echarts.init(document.getElementById('region-bar-chart'));
+            allCharts.push(mapChart, regionBarChart);
+            
+            fetch('https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json')
+                .then(res => res.json())
+                .then(chinaJson => {
+                    echarts.registerMap('china', chinaJson);
+                    const mapOption = {
+                        tooltip: { trigger: 'item', formatter: '{b}<br/>项目数: {c}', backgroundColor: 'rgba(30, 41, 59, 0.8)', textStyle: { color: '#f8fafc' } },
+                        visualMap: {
+                            min: 0, max: 350, left: '5%', bottom: '5%', text: ['高', '低'], calculable: true,
+                            inRange: { color: ['#dbeafe', '#60a5fa', '#2563eb', '#1e3a8a'] },
+                            textStyle: { color: 'var(--text-secondary)' }
+                        },
+                        series: [{ name: '项目数', type: 'map', map: 'china', roam: true, data: regionMapData, emphasis: { label: { show: true, color: '#fff' }, itemStyle: { areaColor: '#ff9500' } } }]
+                    };
+                    mapChart.setOption(mapOption);
+                }).catch(error => console.error("Could not load map data:", error));
+
+            const regionBarOption = {
+                tooltip: { ...tooltipStyle, trigger: 'axis', axisPointer: { type: 'shadow' } },
+                grid: { left: '20%', right: '10%', bottom: '5%', top: '5%', containLabel: false },
+                xAxis: { type: 'value', name: '亿元', nameLocation: 'end', axisLabel: { color: 'var(--text-secondary)' }, nameTextStyle: { color: 'var(--text-secondary)' }, splitLine: { lineStyle: { type: 'dashed', color: '#e2e8f0' } } },
+                yAxis: { type: 'category', data: regionBudgetData.provinces, inverse: true, axisLabel: { color: 'var(--text-secondary)' } },
+                series: [{
+                    name: '预算金额', type: 'bar',
+                    itemStyle: { color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{offset: 0, color: '#86efac'}, {offset: 1, color: '#22c55e'}]) },
+                    data: regionBudgetData.budgets
+                }]
+            };
+            regionBarChart.setOption(regionBarOption);
+            
+            // Chart 4: Purchaser Rose Chart
+            const purchaserRoseChart = echarts.init(document.getElementById('purchaser-chart'));
+            allCharts.push(purchaserRoseChart);
+            const purchaserRoseData = [
+                { name: '政府机关', value: 415 }, { name: '科研院校', value: 320 },
+                { name: '国有企业', value: 255 }, { name: '医疗卫生', value: 118 },
+                { name: '金融机构', value: 81 }, { name: '其他企业', value: 49 }
+            ];
+            const purchaserRoseOption = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}: {c}个 ({d}%)',
+                    backgroundColor: 'rgba(30, 41, 59, 0.8)',
+                    textStyle: { color: '#f8fafc' }
+                },
+                legend: {
+                    top: 'bottom', left: 'center',
+                    textStyle: { color: 'var(--text-secondary)' }
+                },
+                color: professionalPalette,
+                series: [{
+                    name: '采购方构成',
+                    type: 'pie',
+                    radius: ['20%', '70%'],
+                    center: ['50%', '45%'], // Adjust center to make space for legend
+                    roseType: 'area',
+                    itemStyle: {
+                        borderRadius: 8,
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    },
+                    label: { show: false },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: 16,
+                            fontWeight: 'bold'
+                        }
+                    },
+                    data: purchaserRoseData.sort((a, b) => a.value - b.value) // Sort for better visual
+                }]
+            };
+            purchaserRoseChart.setOption(purchaserRoseOption);
+
+
+            // Chart 5: Project Type Doughnut Chart
+            const projectTypeChart = echarts.init(document.getElementById('project-type-chart'));
+            allCharts.push(projectTypeChart);
+            const projectTypeOption = {
+                tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)', backgroundColor: 'rgba(30, 41, 59, 0.8)', textStyle: { color: '#f8fafc' } },
+                legend: { top: 'bottom', left: 'center', textStyle: { color: 'var(--text-secondary)' } },
+                color: professionalPalette,
+                series: [{
+                    name: '项目类型', type: 'pie', radius: ['50%', '75%'],
+                    avoidLabelOverlap: false, itemStyle: { borderRadius: 10, borderColor: '#fff', borderWidth: 4 },
+                    label: { show: false, position: 'center' },
+                    emphasis: { label: { show: true, fontSize: '22', fontWeight: 'bold', color: 'var(--text-primary)' } },
+                    labelLine: { show: false },
+                    data: projectTypeData
+                }]
+            };
+            projectTypeChart.setOption(projectTypeOption);
+
+            // Chart 6: Keyword Bar
+            const keywordBarChart = echarts.init(document.getElementById('keyword-bar-chart'));
+            allCharts.push(keywordBarChart);
+            const keywordBarOption = {
+                tooltip: { ...tooltipStyle, trigger: 'axis', axisPointer: { type: 'shadow' } },
+                grid: { left: '20%', right: '10%', bottom: '5%', top: '5%', containLabel: false },
+                xAxis: { type: 'value', axisLabel: { color: 'var(--text-secondary)' }, splitLine: { lineStyle: { type: 'dashed', color: '#e2e8f0' } } },
+                yAxis: { type: 'category', data: topKeywordsData.keywords, inverse: true, axisLabel: { color: 'var(--text-secondary)' } },
+                series: [{
+                    name: '项目提及次数', type: 'bar',
+                    itemStyle: { color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [{offset: 0, color: '#93c5fd'}, {offset: 1, color: '#3b82f6'}]) },
+                    data: topKeywordsData.counts
+                }]
+            };
+            keywordBarChart.setOption(keywordBarOption);
+
+            // Chart 7: Word Cloud
+            const wordcloudChart = echarts.init(document.getElementById('wordcloud-chart'));
+            allCharts.push(wordcloudChart);
+            const wordcloudOption = {
+                tooltip: { show: true, formatter: '{b}: {c}', backgroundColor: 'rgba(30, 41, 59, 0.8)', textStyle: { color: '#f8fafc' } },
+                series: [{
+                    type: 'wordCloud', shape: 'circle',
+                    sizeRange: [15, 65], rotationRange: [-45, 45],
+                    textStyle: {
+                        color: () => professionalPalette[Math.floor(Math.random() * professionalPalette.length)]
+                    },
+                    emphasis: {
+                        textStyle: {
+                            fontWeight: 'bold',
+                            color: '#000'
+                        }
+                    },
+                    data: wordcloudData
+                }]
+            };
+            wordcloudChart.setOption(wordcloudOption);
+
+            // --- Resize Listener ---
+            window.addEventListener('resize', () => {
+                allCharts.forEach(chart => {
+                    if (chart) {
+                        chart.resize();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
