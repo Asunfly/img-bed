@@ -1,0 +1,1345 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.428571; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-width: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-size-adjust: inherit; font-kerning: inherit; font-variant-alternates: inherit; font-variant-ligatures: inherit; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-variant-position: inherit; font-variant-emoji: inherit; font-feature-settings: inherit; font-optical-sizing: inherit; font-variation-settings: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; position: relative; }
+#write svg h1, #write svg h2, #write svg h3, #write svg h4, #write svg h5, #write svg h6, #write svg p { position: static; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right-width: 0px; border-right-style: none; border-right-color: currentcolor; background-color: inherit; }
+.CodeMirror-linenumber { -webkit-user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: medium; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: medium !important; border-style: none !important; border-color: currentcolor !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; border-bottom-style: none; border-bottom-color: currentcolor; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: medium; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.mermaid-svg { margin: auto; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.428571rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left-width: 28px; border-left-style: solid; border-left-color: transparent; border-right-width: 28px; border-right-style: solid; border-right-color: transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right-width: 8px; border-right-style: solid; border-right-color: transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left-width: 0.25em; border-left-style: solid; border-left-color: rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+
+/*
+ * Copyright (C) 2018 Drake, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * GitHub https://github.com/liangjingkanji/DrakeTyporaTheme
+ */
+@import url();
+@include-when-export url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --text-color: #333333;
+    --bg-color: #ffffff;
+    --control-text-color: var(--text-color);
+    --meta-content-color: var(--text-color);
+    --active-file-border-color: var(--drake-accent);
+    --rawblock-edit-panel-bd: var(--code-block-bg-color);
+    --item-hover-bg-color: #E5E5E596;
+    --active-file-bg-color: var(--item-hover-bg-color);
+
+    --blur-text-color: rgba(51, 51, 51, 0.5);
+    --drake-accent: #e95f59;
+    --drake-highlight: #d63200;
+    --a-color: var(--drake-highlight);
+    --variable-color: var(--drake-highlight);
+    --outline-active-color: var(--a-color);
+    --code-block-bg-color: #f6f8fa;
+    --code-block-color: #24292e;
+    --title-color: #273849;
+    --blockquote-border-color: var(--drake-accent);
+    --blockquote-color: var(--text-color);
+    --blockquote-bg-color: #fdefee;
+    --strong-color: var(--title-color);
+    --h2-underline-color: var(--title-color);
+    --horizontal-divider-color: var(--title-color);
+    --height-light-color: var(--drake-highlight);
+    --height-light-border-color: var(--drake-highlight);
+    --yaml-color: #777777;
+    --yaml-bg-color: #f7f7f7;
+    --footnotes-bg-color: #3c3d3e;
+    --footnotes-highlight: #FFD760;
+    --table-border-color: #dfe2e5;
+    --table-header-bg-color: #f8f8f8;
+    --table-bg-color: var(--bg-color);
+    --table-n2-bg-color: #f8f8f8;
+    --input-bg-color: var(--item-hover-bg-color);
+    --btn-hover-bg-color: var(--item-hover-bg-color);
+    --checkbox-checked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M425.984 726.016l384-384-59.99-61.995-324.01 324.011-152.021-152.021L213.973 512zm384-598.016q36.01 0 61.013 25.984T896 213.974v596.01q0 34.005-25.003 59.99t-61.013 25.983h-596.01q-36.011 0-61.014-25.984t-25.003-59.989v-596.01q0-34.006 25.003-59.99T213.973 128h596.011z' fill='%2365b73b'/%3E%3C/svg%3E");
+    --checkbox-unchecked: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cpath d='M810.667 213.333v597.334H213.333V213.333h597.334m0-85.333H213.333C166.4 128 128 166.4 128 213.333v597.334C128 857.6 166.4 896 213.333 896h597.334C857.6 896 896 857.6 896 810.667V213.333C896 166.4 857.6 128 810.667 128z' fill='%23333333'/%3E%3C/svg%3E");
+}
+
+html {
+    font-size: var(--text-size);
+}
+
+body {
+    font-family: var(--text-font) !important;
+    color: var(--text-color);
+    -webkit-font-feature-settings: "liga" on, "calt" on;
+    -webkit-font-smoothing: subpixel-antialiased;
+    text-rendering: optimizeLegibility;
+    letter-spacing: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+p {
+    line-height: var(--text-line-height);
+}
+
+/*code block*/
+.md-fences {
+    font-size: 1rem;
+    padding: 0.5rem !important;
+    border-radius: 2px;
+    word-wrap: normal;
+    background-color: var(--code-block-bg-color);
+    color: var(--code-block-color);
+    border: none;
+    line-height: var(--code-block-line-height);
+}
+
+/*inline latex*/
+.MathJax {
+  font-size: 120% !important;
+}
+/*math-block latex*/
+.md-math-block .MathJax {
+  font-size: 130% !important;
+}
+
+/*mermaid*/
+[id^=mermaidChart] {
+    fill: var(--text-color) !important;
+}
+[id^=mermaidChart] rect.rect {
+    fill: rgba(175, 255, 212, 0.3) !important;
+}
+.md-diagram-panel-preview text.actor > tspan { /*方块文字*/
+    fill: var(--code-block-color) !important;
+    stroke: none !important;
+    font-family: var(--text-font) !important;
+    font-size: 1rem !important;
+}
+.md-diagram-panel-preview .actor { /*方块*/
+    stroke: var(--table-border-color) !important;
+    fill: var(--code-block-bg-color) !important;
+}
+.md-diagram-panel-preview .actor-line { /*竖线*/
+    stroke: var(--text-color) !important;
+    stroke-width: 1px;
+}
+.md-diagram-panel-preview .messageLine0 { /*横线*/
+    stroke-width: 1.5;
+    stroke-dasharray: none;
+    stroke: var(--text-color) !important;
+}
+.md-diagram-panel-preview .messageLine1 { /*虚线*/
+    stroke-width: 1.5 !important;
+    stroke-dasharray: 2, 2 !important;
+    stroke: var(--text-color) !important;
+}
+.md-diagram-panel-preview .messageText { /*描述文字*/
+    fill: var(--text-color) !important;
+    font-family: var(--text-font) !important;
+    font-size: 1rem !important;
+}
+.md-diagram-panel-preview .activation0 { /*长方形*/
+    fill: #e6e6e6 !important;
+    stroke: var(--text-color) !important;
+}
+.md-diagram-panel-preview .labelText, .md-diagram-panel-preview .labelText > tspan { /*循环标记*/
+    fill: var(--code-block-color) !important;
+    font-family: var(--text-font) !important;
+    font-size: 1rem !important;
+    dominant-baseline: unset;
+    alignment-baseline: unset;
+}
+.md-diagram-panel-preview .labelBox { /*循环标记背景*/
+    stroke: var(--table-border-color) !important;
+    fill: var(--code-block-bg-color) !important;
+}
+.md-diagram-panel-preview .loopLine { /*循环标记虚线*/
+    stroke: var(--text-color) !important;
+}
+.md-diagram-panel-preview .loopText, .md-diagram-panel-preview .loopText > tspan { /*循环名称*/
+    fill: var(--text-color) !important;
+    font-size: 1rem !important;
+}
+.md-diagram-panel-preview .sequenceNumber { /*序号*/
+    fill: var(--bg-color) !important;
+}
+pre.md-fences-advanced.md-focus .md-fences-adv-panel {
+    border: none;
+}
+.md-diagram-panel-preview .edgePath .path { /*箭头*/
+    stroke: var(--text-color) !important;
+}
+.md-diagram-panel-preview .edgeLabel rect { /*条件文字背景*/
+    fill: var(--bg-color) !important;
+}
+.md-diagram-panel-preview .edgeLabel span { /*条件文字*/
+    color: var(--text-color);
+}
+.md-diagram-panel-preview .node rect,
+.md-diagram-panel-preview .node circle,
+.md-diagram-panel-preview .node ellipse,
+.md-diagram-panel-preview .node polygon,
+.md-diagram-panel-preview .node path { /*形状*/
+    stroke: var(--table-border-color) !important;
+    fill: var(--code-block-bg-color) !important;
+}
+#write .md-diagram-panel .md-diagram-panel-preview div { /*形状内文字*/
+    color: var(--code-block-color) !important;
+    font-family: var(--text-font) !important;
+    font-size: 1rem !important;
+}
+
+/*code snippet*/
+#write code, tt {
+    margin: 0 2px;
+    color: var(--drake-highlight);
+}
+
+/*variable*/
+var {
+    color: var(--variable-color);
+    font-weight: bold;
+}
+
+/*raw block*/
+.md-rawblock-control:not(.md-rawblock-tooltip) {
+    border-radius: 2px 0 2px 2px;
+    padding: 0.2rem !important;
+}
+.md-rawblock:hover > .md-rawblock-container {
+    background: none;
+}
+.md-rawblock-input {
+    font-size: 1rem;
+}
+.md-rawblock-tooltip-btn:hover {
+    background: none;
+}
+.md-rawblock:hover > .md-rawblock-tooltip {
+    border-radius: 2px 2px 0 0;
+    margin-bottom: 2px !important;
+}
+.md-rawblock-tooltip.md-rawblock-control {
+    border-radius: 2px 2px 0 0;
+    color: var(--code-block-color);
+}
+.md-rawblock-tooltip-name {
+    color: var(--code-block-color);
+    opacity: 1;
+}
+
+/*quote block*/
+blockquote:before {
+    display: block;
+    position: absolute;
+    content: '';
+    width: 4px;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: var(--blockquote-border-color);
+    border-radius: 2px;
+}
+
+blockquote {
+    color: var(--blockquote-color);
+    border-radius: 2px;
+    padding: 10px 16px;
+    background-color: var(--blockquote-bg-color);
+    position: relative;
+    border-left: none;
+}
+
+#write strong {
+    color: var(--strong-color);
+    font-weight: bold;
+}
+#write blockquote strong {
+    color: var(--blockquote-color);
+}
+
+/*link*/
+#write a {
+    color: var(--a-color);
+    text-decoration: none;
+}
+#write h2 a .md-plain {
+    border-bottom: .2rem solid var(--a-color);
+}
+.on-focus-mode #write a .md-plain, .on-focus-mode .md-htmlblock-container a:hover {
+    border-bottom: .1rem solid var(--blur-text-color);
+}
+#write a .md-plain, .md-htmlblock-container a:hover,
+.on-focus-mode #write .md-focus a .md-plain, .md-focus .md-htmlblock-container a:hover {
+    border-bottom: .1rem solid var(--a-color);
+}
+[md-inline=link] a {
+    margin: 0 .2rem;
+}
+a:any-link {
+    color: var(--a-color);
+}
+
+img {
+    border-left: none;
+    border-right: none;
+    vertical-align: baseline;
+    border-radius: 2px;
+}
+
+#write {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 30px 100px;
+}
+#typora-source .CodeMirror-lines {
+    max-width: 1200px;
+}
+
+#write > ul:first-child,
+#write > ol:first-child {
+    margin-top: 30px;
+}
+
+body > *:first-child {
+    margin-top: 0 !important;
+}
+
+body > *:last-child {
+    margin-bottom: 0 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--title-font);
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+    color: var(--title-color);
+}
+
+h3.md-focus:before, h4.md-focus:before, h5.md-focus:before, h6.md-focus:before {
+    visibility: hidden;
+}
+
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+h2 .md-plain {
+    padding-bottom: .3rem;
+    border-bottom: .2rem solid var(--h2-underline-color);
+    line-height: 3rem;
+}
+.on-focus-mode h2.md-end-block.md-heading:not(.md-focus):not(.md-focus-container):after {
+    background-color: var(--blur-text-color) !important;
+}
+
+h3 {
+    font-size: 1.4rem;
+}
+
+h4 {
+    font-size: 1.2rem;
+}
+
+h5 {
+    font-size: 1rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+
+h1 tt,
+h1 code {
+    font-size: inherit !important;
+}
+
+h2 tt,
+h2 code {
+    font-size: inherit !important;
+}
+
+h3 tt,
+h3 code {
+    font-size: inherit !important;
+}
+
+h4 tt,
+h4 code {
+    font-size: inherit !important;
+}
+
+h5 tt,
+h5 code {
+    font-size: inherit !important;
+}
+
+h6 tt,
+h6 code {
+    font-size: inherit !important;
+}
+
+p, blockquote, ul, ol, dl, table {
+    margin: var(--p-spacing) 0;
+}
+
+li > ol,
+li > ul {
+    margin: 0 0;
+}
+li {
+    margin: 0.5em 0;
+}
+
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: var(--horizontal-divider-color);
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+body > h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+body > h1:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+body > h3:first-child,
+body > h4:first-child,
+body > h5:first-child,
+body > h6:first-child {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+a:first-child h1,
+a:first-child h2,
+a:first-child h3,
+a:first-child h4,
+a:first-child h5,
+a:first-child h6 {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+h1 p,
+h2 p,
+h3 p,
+h4 p,
+h5 p,
+h6 p {
+    margin-top: 0;
+}
+
+li p.first {
+    display: inline-block;
+}
+
+ul, ol {
+    padding-inline-start: 2em;
+}
+
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+
+table {
+    padding: 0;
+    word-break: initial;
+    background-color: var(--table-bg-color);
+}
+table tr {
+    border-top: .1em solid var(--table-border-color);
+    margin: 0;
+    padding: 0;
+}
+table th {
+    font-weight: bold;
+    border: .1em solid var(--table-border-color);
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: .1em solid var(--table-border-color);
+    margin: 0;
+    padding: 6px 13px;
+}
+table thead {
+    background-color: var(--table-header-bg-color);
+}
+table tr:nth-child(2n) {
+    background-color: var(--table-n2-bg-color);
+}
+table tr th:first-child,
+table tr td:first-child {
+    margin-top: 0;
+}
+table tr th:last-child,
+table tr td:last-child {
+    margin-bottom: 0;
+}
+
+#write em {
+    padding: 0 5px 0 2px;
+}
+
+#write table thead th {
+    background-color: var(--table-header-bg-color);
+}
+
+/* height light */
+#write mark {
+    border: .1em solid var(--height-light-border-color);
+    color: var(--height-light-color);
+    background-color: transparent;
+    padding: .1rem .5rem;
+    border-radius: 2rem;
+    margin: 0 .2rem;
+    font-size: .95rem;
+}
+
+/*shortcut*/
+kbd {
+    border: .1em solid #5b5b5e;
+    background: transparent;
+    color: var(--text-color);
+    margin: 0 .4rem;
+    font-family: var(--text-font) !important;
+    font-size: .95rem;
+    padding: .3em .4em;
+    border-radius: .4em;
+    vertical-align: top;
+    box-shadow: .1em .1em .2em rgba(0, 0, 0, 0.3);
+}
+
+#write del {
+    padding: 1px 2px;
+}
+
+.md-task-list-item > input {
+    margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 12px;
+    }
+
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+/*YAML*/
+#write pre.md-meta-block {
+    padding: 1rem;
+    font-size: 1rem;
+    line-height: 1.45;
+    background-color: var(--yaml-bg-color);
+    border: 0;
+    border-radius: 2px;
+    color: var(--yaml-color);
+    margin-top: 0 !important;
+}
+
+.mathjax-block > .code-tooltip {
+    bottom: .375rem;
+}
+
+#write > h3.md-focus:before {
+    left: -1.5625rem;
+    top: .375rem;
+}
+
+#write > h4.md-focus:before {
+    left: -1.5625rem;
+    top: .285714286rem;
+}
+
+#write > h5.md-focus:before {
+    left: -1.5625rem;
+    top: .285714286rem;
+}
+
+#write > h6.md-focus:before {
+    left: -1.5625rem;
+    top: .285714286rem;
+}
+
+.md-image > .md-meta {
+    border-radius: 2px;
+    font-family: initial;
+    padding: 2px 0 0 4px;
+    color: inherit;
+}
+
+.md-tag {
+    color: inherit;
+}
+
+.md-toc {
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.typora-quick-open-item {
+    font-size: 1rem !important;
+    height: 50px;
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+#typora-quick-open {
+    box-shadow: 0 0 8px #00000045;
+    padding: 0;
+}
+
+.ty-quick-open-category.ty-has-prev .ty-quick-open-category-title {
+    border-top: none;
+}
+
+#typora-quick-open-input {
+    margin: 8px;
+    box-shadow: none;
+    border-radius: 2px;
+}
+
+#typora-quick-open-input input {
+    font-size: 1rem;
+    box-shadow: none;
+    padding-top: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 32px;
+    max-height: 32px;
+    border: none;
+}
+
+.modal-dialog#typora-quick-open {
+    border-radius: 8px;
+}
+
+.ty-quick-open-category-title {
+    padding-left: 8px;
+    color: #BEBEBE;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+}
+
+.typora-quick-open-item-path {
+    font-size: 0.8rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 1px;
+}
+
+/*search input*/
+.form-control {
+    border: none;
+    border-radius: 2px;
+    box-shadow: none;
+}
+
+#md-searchpanel .btn {
+    border-radius: 2px;
+}
+
+#search-panel-replaceall-btn {
+    padding-right: 5px !important;
+    text-align: center !important;
+}
+
+#search-panel-replace-btn {
+    text-align: center !important;
+}
+
+#md-searchpanel input {
+    background: var(--input-bg-color);
+    border-radius: 2px;
+}
+
+.searchpanel-search-option-btn {
+    border-radius: 2px;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+}
+
+.searchpanel-search-option-btn.active {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+#md-notification:before {
+    top: 10px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header,
+.context-menu,
+.megamenu-content,
+footer {
+    font-family: initial;
+}
+
+/*sidebar*/
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state {
+    visibility: visible;
+}
+.file-node-content {
+    display: flex;
+    align-items: center;
+}
+.file-node-open-state {
+    margin-right: .5rem;
+}
+.file-node-icon {
+    margin-right: .5rem;
+}
+
+#typora-sidebar {
+    font-size: inherit;
+    font-family: var(--title-font);
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+.file-list-item-summary, .file-list-item-parent-loc, .file-list-item-time, .file-list-item-summary {
+    font-size: 0.9rem !important;
+    font-family: var(--text-font);
+}
+
+.file-list-item-file-ext-part {
+    display: none;
+}
+
+.outline-item {
+    font-size: 1rem;
+}
+
+/*footnotes mark*/
+#write .md-footnote {
+    background-color: inherit;
+    color: var(--drake-highlight);
+    font-size: 0.9rem;
+    border-radius: 0.9rem;
+    padding-left: 0;
+}
+
+#write .md-footnote:before {
+    content: "[";
+}
+
+#write .md-footnote:after {
+    content: "]";
+}
+
+/*footnotes content*/
+.md-hover-tip .code-tooltip-content {
+    border-radius: 2px;
+}
+
+/*footnotes title*/
+span.md-def-name {
+    padding-right: 3ch;
+    padding-left: 0;
+    position: relative;
+    font-weight: normal;
+}
+
+/*footnotes desc*/
+.footnotes {
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--text-color);
+    position: relative;
+}
+
+/*footnotes tooltip text*/
+.code-tooltip-content .md-plain {
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.code-tooltip-content code {
+    padding: 0 2px;
+    font-family: inherit;
+    color: var(--footnotes-highlight);
+    background-color: inherit;
+}
+
+.code-tooltip-content a {
+    color: var(--footnotes-highlight);
+}
+
+div.code-tooltip-content {
+    box-shadow: 0 0 8px #00000045;
+    background: var(--footnotes-bg-color);
+}
+
+.footnotes {
+    opacity: 1;
+}
+
+.md-def-name:after {
+    content: ". ^";
+    color: var(--text-color);
+}
+
+.md-def-footnote .md-def-name:before {
+    content: "";
+    color: var(--text-color);
+    position: absolute;
+}
+
+.md-def-name:before {
+    content: "";
+    color: var(--text-color);
+    position: absolute;
+}
+
+.md-content.md-url, .md-def-content.md-def-url.md-auto-disp {
+    text-decoration: none;
+    border-bottom: .1rem solid var(--text-color);
+}
+
+.CodeMirror-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.file-list-item-summary {
+    font-size: 1em;
+}
+
+.pin-outline #outline-content .outline-active strong, .pin-outline .outline-active {
+    font-weight: 500;
+    color: var(--outline-active-color);
+}
+
+.file-list-item.active {
+    border-left: 4px solid var(--drake-accent);
+}
+
+#md-searchpanel .btn:not(.close-btn):hover {
+    box-shadow: none;
+    background: var(--btn-hover-bg-color);
+}
+
+/*checkbox*/
+#write input[type=checkbox] {
+    opacity: 0;
+    height: 1.6rem;
+    width: 1.6rem;
+    margin-left: -2em;
+    margin-top: 0;
+    top: 0;
+}
+
+#write .ul-list li.md-task-list-item.task-list-done::before {
+    content: "";
+    background: var(--checkbox-checked) 0 0 no-repeat;
+    background-size: 100%;
+    display: inline-block;
+    position: absolute;
+    height: 1.6rem;
+    width: 1.6rem;
+    margin-left: -2em;
+}
+#write .ul-list li.md-task-list-item.task-list-not-done::before {
+    content: "";
+    background: var(--checkbox-unchecked) 0 0 no-repeat;
+    background-size: 100%;
+    display: inline-block;
+    position: absolute;
+    height: 1.6rem;
+    width: 1.6rem;
+    margin-left: -2em;
+}
+.task-list-item p {
+    line-height: 1.6rem;
+}
+
+/*insert table*/
+.btn {
+    border-radius: 2px;
+}
+
+.modal-content {
+    border-radius: 8px;
+}
+
+.btn-primary:hover, .btn-primary:active {
+    background-color: var(--btn-hover-bg-color);
+    color: var(--drake-highlight);
+}
+
+.btn-primary {
+    background-color: transparent;
+    color: var(--drake-highlight);
+}
+
+.btn-default {
+    background-color: transparent;
+}
+
+.btn:active {
+    box-shadow: none;
+    border-color: transparent;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+#table-insert-col, #table-insert-row {
+    background: var(--input-bg-color);
+    border-radius: 2px;
+}
+
+/*preference panel*/
+#megamenu-content {
+    background-image: none !important;
+    background-color: var(--bg-color);
+}
+#top-titlebar {
+    height: inherit;
+    background-color: var(--bg-color);
+}
+#megamenu-menu-sidebar {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+.long-btn {
+    width: inherit;
+    min-width: 300px;
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
+}
+.megamenu-menu-panel h1 {
+    margin-bottom: 3rem;
+    text-align: left;
+}
+.megamenu-menu-panel h1, .megamenu-menu-panel h2 {
+    font-weight: normal;
+}
+#recent-file-panel-search-input {
+    height: 45px;
+    border: none;
+    border-bottom: 1px solid var(--text-color);
+    padding-left: 8px;
+}
+#recent-file-panel-search-input::placeholder {
+    color: var(--text-color);
+    opacity: .5;
+}
+.megamenu-menu-header {
+    border-bottom: none;
+}
+#recent-file-panel-action-btn {
+    background: none;
+    border: none;
+}
+#recent-file-panel-action-btn-container {
+    float: none;
+    display: inline-block;
+}
+#top-titlebar .toolbar-icon.btn.hover, #top-titlebar .toolbar-icon.btn:hover {
+    background-color: var(--btn-hover-bg-color);
+    color: var(--text-color);
+}
+.megamenu-menu-panel .btn:hover {
+    background-color: var(--btn-hover-bg-color) !important;
+    color: var(--text-color);
+}
+#recent-file-panel tbody tr:nth-child(2n-1),
+.megamenu-menu-panel table thead,
+.megamenu-menu-panel table tr {
+    background-color: transparent;
+}
+.megamenu-menu-panel table {
+    font-weight: normal;
+}
+#megamenu-back-btn {
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+}
+.megamenu-menu-header #megamenu-menu-header-title {
+    color: var(--text-color);
+}
+header, .context-menu, .megamenu-content, footer {
+    font-family: var(--text-font);
+}
+.ty-preferences select {
+    padding-left: 2px;
+}
+.preference-item-hint {
+    font-size: 14px;
+}
+a.ty-link {
+    color: var(--a-color);
+    margin: 0 .2rem;
+}
+
+/**
+    code render
+    Name: IntelliJ IDEA light theme
+    From IntelliJ IDEA by JetBrains
+ */
+.cm-s-inner.CodeMirror {
+    background: none;
+    color: var(--code-block-color);
+}
+.cm-s-inner span.cm-number {
+    color: #4A86E8;
+}
+.cm-s-inner span.cm-atom {
+    color: #9E880D;
+}
+.cm-s-inner span.cm-def {
+    color: #00f;
+}
+.cm-s-inner span.cm-variable {
+    color: var(--code-block-color);
+}
+.cm-s-inner span.cm-variable-2 {
+    color: #00627A;
+}
+.cm-s-inner span.cm-variable-3, .cm-s-inner span.cm-type {
+    color: #00627A;
+}
+.cm-s-inner span.cm-property {
+    color: var(--code-block-color);
+}
+.cm-s-inner span.cm-keyword {
+    color: #708;
+}
+.cm-s-inner span.cm-operator {
+    color: var(--code-block-color);
+}
+.cm-s-inner span.cm-comment {
+    color: #787878;
+}
+.cm-s-inner span.cm-string {
+    color: #008000;
+}
+.cm-s-inner span.cm-string-2 {
+    color: #008000;
+}
+.cm-s-inner span.cm-qualifier {
+    color: var(--code-block-color);
+}
+.cm-s-inner span.cm-error {
+    color: red;
+}
+.cm-s-inner span.cm-attribute {
+    color: var(--code-block-color);
+}
+.cm-s-inner span.cm-tag {
+    color: var(--code-block-color);
+}
+.cm-s-inner span.cm-link {
+    color: #4A86E8;
+}
+.cm-s-inner span.cm-builtin {
+    color: var(--code-block-color);
+}
+.cm-s-inner span.cm-bracket {
+    color: var(--code-block-color);
+}
+.cm-s-inner .CodeMirror-gutters {
+    border-right: 1px solid rgba(120, 120, 120, 0.3);
+}
+.cm-s-inner .CodeMirror-linenumber {
+    color: #787878;
+}
+
+ @media print { @page {margin: 0 0 0 0;} body.typora-export {padding-left: 0; padding-right: 0;} #write {padding:0;}}
+</style><title>框架医疗大模型产品竞争格局分析架</title>
+</head>
+<body class='typora-export'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='医疗大模型产品竞争格局分析'><span>医疗大模型产品竞争格局分析</span></h1><h2 id='一行业宏观环境分析'><span>一、行业宏观环境分析</span></h2><h3 id='11-政策驱动因素'><span>1.1 政策驱动因素</span></h3><figure class='table-figure'><table><thead><tr><th><span>来源</span></th><th><span>标题</span></th><th><span>发布时间</span></th><th><span>原文链接</span></th></tr></thead><tbody><tr><td><span>药监局</span></td><td><span>国务院办公厅关于全面深化药品医疗器械</span><strong><span>监管改革</span></strong><span> 促进医药产业</span><strong><span>高质量发展</span></strong><span>的意见</span></td><td><span>2025/1/3</span></td><td><a href='https://www.nmpa.gov.cn/xxgk/fgwj/qita/20250103170940152.html' target='_blank' class='url'>https://www.nmpa.gov.cn/xxgk/fgwj/qita/20250103170940152.html</a></td></tr><tr><td><span>药监局</span></td><td><strong><span>医疗器械</span></strong><span>监督管理条例（修订）</span></td><td><span>2025/1/7</span></td><td><a href='https://www.nmpa.gov.cn/xxgk/fgwj/flxzhfg/20250107162942191.html' target='_blank' class='url'>https://www.nmpa.gov.cn/xxgk/fgwj/flxzhfg/20250107162942191.html</a></td></tr><tr><td><span>科技教育司</span></td><td><span>【通告公告】国家卫生健康委办公厅关于印发《国家卫生健康委主责国家重点</span><strong><span>研发</span></strong><span>计划重点专项管理实施细则》的通知</span></td><td><span>2025/1/10</span></td><td><a href='http://www.nhc.gov.cn/qjjys/s7938/202501/35a2ef3742ed407c933114a903ace0cc.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/qjjys/s7938/202501/35a2ef3742ed407c933114a903ace0cc.shtml</a></td></tr><tr><td><span>医政司</span></td><td><span>【通告公告】国家卫生健康委办公厅关于启动2024年度二级和三级公立医院</span><strong><span>绩效监测</span></strong><span>有关工作的通知</span></td><td><span>2025/1/13</span></td><td><a href='http://www.nhc.gov.cn/yzygj/s3594q/202501/5ec3897719a2412996c2e79753b5f2fc.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/yzygj/s3594q/202501/5ec3897719a2412996c2e79753b5f2fc.shtml</a></td></tr><tr><td><span>药监局</span></td><td><span>国家药监局综合司关于《采用</span><strong><span>脑机接口</span></strong><span>技术的医疗器械 用于</span><strong><span>人工智能算法</span></strong><span>的脑电</span><strong><span>数据集</span></strong><span>质量要求与评价方法》医疗器械行业</span><strong><span>标准</span></strong><span>立项的通知</span></td><td><span>2025/2/25</span></td><td><a href='https://www.nmpa.gov.cn/xxgk/fgwj/gzwj/gzwjylqx/20250225102359128.html' target='_blank' class='url'>https://www.nmpa.gov.cn/xxgk/fgwj/gzwj/gzwjylqx/20250225102359128.html</a></td></tr><tr><td><span>国家卫生健康委</span></td><td><span>《关于印发紧密型县域医共体</span><strong><span>信息化功能指引</span></strong><span>的通知》政策解读</span></td><td><span>2025/3/12</span></td><td><a href='http://www.nhc.gov.cn/guihuaxxs/gongwen12/202503/8dff874b31ce43d6b6d8fdce7cde6ef8.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/guihuaxxs/gongwen12/202503/8dff874b31ce43d6b6d8fdce7cde6ef8.shtml</a></td></tr><tr><td><span>卫健委等三部门</span></td><td><span>三部门印发紧密型县域医共体</span><strong><span>信息化功能指引</span></strong></td><td><span>2025/3/14</span></td><td><a href='http://www.nhc.gov.cn/guihuasi/s3574/202502/52e72f9d8a0f4c1d8b2e3f4e5d6c7b8a.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/guihuasi/s3574/202502/52e72f9d8a0f4c1d8b2e3f4e5d6c7b8a.shtml</a></td></tr><tr><td><span>医政司</span></td><td><span>《2025年国家</span><strong><span>医疗质量安全改进目标</span></strong><span>》解读</span></td><td><span>2025/3/21</span></td><td><a href='http://www.nhc.gov.cn/yzygj/s3586/202503/4bc59f5cf50043c19f15008439973c5f.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/yzygj/s3586/202503/4bc59f5cf50043c19f15008439973c5f.shtml</a></td></tr><tr><td><span>国务院办公厅</span></td><td><span>国务院办公厅印发《关于提升中药质量促进中医药产业</span><strong><span>高质量发展</span></strong><span>的意见》</span></td><td><span>2025/3/25</span></td><td><a href='http://www.gov.cn/zhengce/content/2025-03/20/content_WS65f97330c6d08653e05a30e7.htm' target='_blank' class='url'>http://www.gov.cn/zhengce/content/2025-03/20/content_WS65f97330c6d08653e05a30e7.htm</a></td></tr><tr><td><span>卫健委等七部门</span></td><td><span>七部门印发2023年度全国三级公立医院</span><strong><span>绩效监测分析情况</span></strong><span>的通报</span></td><td><span>2025/3/31</span></td><td><a href='http://www.nhc.gov.cn/yzygj/s7659/202503/a34d5d345e6f478c9d0e1f2a3b4c5d6e.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/yzygj/s7659/202503/a34d5d345e6f478c9d0e1f2a3b4c5d6e.shtml</a></td></tr><tr><td><span>国家卫生健康委</span></td><td><span>国家卫生健康委印发《</span><strong><span>医疗质量安全核心制度</span></strong><span>落实情况</span><strong><span>监测指标</span></strong><span>（2025年版）》</span></td><td><span>2025/6/5</span></td><td><a href='http://www.nhc.gov.cn/yzygj/s3593/202506/f0ef9d8a0c764c1d8b2e3f4e5d6c7b8a.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/yzygj/s3593/202506/f0ef9d8a0c764c1d8b2e3f4e5d6c7b8a.shtml</a></td></tr><tr><td><span>国家卫生健康委</span></td><td><span>国家卫生健康委印发《三级医院</span><strong><span>评审标准</span></strong><span>（2025年版）》</span></td><td><span>2025/6/12</span></td><td><a href='http://www.nhc.gov.cn/yzygj/c100068/202506/25229edc80d34694b7debf54ddef9f9f.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/yzygj/c100068/202506/25229edc80d34694b7debf54ddef9f9f.shtml</a></td></tr><tr><td><span>国家卫生健康委</span></td><td><span>国家卫生健康委印发国家三级公立医院</span><strong><span>绩效监测操作手册</span></strong><span>（2025版）</span></td><td><span>2025/6/30</span></td><td><a href='http://www.nhc.gov.cn/yzygj/c100068/202506/6a97e937c58b413d8a0ffdcc23d325d4.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/yzygj/c100068/202506/6a97e937c58b413d8a0ffdcc23d325d4.shtml</a></td></tr><tr><td><span>国家中医药管理局综合司</span></td><td><span>国家中医药管理局综合司印发《国家三级公立中医医院</span><strong><span>绩效监测操作手册</span></strong><span>（2025版）》</span></td><td><span>2025/7/1</span></td><td><a href='http://www.natcm.gov.cn/yizhengsi/zhengcewenjian/2025-06-27/36543.html' target='_blank' class='url'>http://www.natcm.gov.cn/yizhengsi/zhengcewenjian/2025-06-27/36543.html</a></td></tr><tr><td><span>国家卫生健康委</span></td><td><span>国家卫生健康委发布《关于进一步加强医疗机构</span><strong><span>电子病历信息</span></strong><span>使用管理的通知》（附解读）</span></td><td><span>2025/7/1</span></td><td><a href='http://www.nhc.gov.cn/yzygj/s7659/202506/409ee9b9e85f4f77a9bcf67a249393bd.shtml' target='_blank' class='url'>http://www.nhc.gov.cn/yzygj/s7659/202506/409ee9b9e85f4f77a9bcf67a249393bd.shtml</a></td></tr></tbody></table></figure><p><span>1.宏观政策层面：指明“高质量发展”的国家战略方向，业务价值不再是“锦上添花”，而是实现国家“高质量发展”战略目标的“必要工具”。</span></p><ul><li><p><span>西药医疗器械和中医药两大政策文件，共同指向的核心目标是“高质量发展”，内涵要求是：创新驱动、效率提升和全周期管理。这与我们业务层面具有深层次的契合点。</span></p><ul><li><p><span>创新驱动： 鼓励新药研发、高端医疗器械创新。这直接利好利用AI和大数据进行临床试验模拟、药物重定位等业务。</span></p></li><li><p><span>效率提升： 改革监管模式，提升审评审批效率。这意味着监管流程的数字化、智能化（如在线审批、AI辅助审评）是必然趋势。</span></p></li><li><p><span>全周期管理： 强化对药品、医疗器械从研发到使用的全生命周期管理。这必须依赖于强大的信息化系统和大数据追溯平台。</span></p></li></ul></li></ul><p><span>2.行业规划与监管部署：构建数字健康的基础设施与规则体系，行业主管部门正通过“建标准、搭平台、定规则”的方式，系统性地将信息化、大数据和AI整合到医疗服务的核心流程中。</span></p><ul><li><p><span>信息化基础设施建设：打通数据孤岛，夯实数据基础，医共体信息化和电子病历使用管理文件，共同指向数据互通、业务协同、资源共享并再次基础上从源头提升数据的质量和标准化程度。</span></p></li><li><p><span>数据驱动的质量与安全监管，数据应用融入核心业务，医疗质量安全、三级评审标准、安全核心制度，共同构建一个以数据为核心的医疗质量安全管理体系</span></p></li></ul><p><span>3.前沿技术（AI/脑机接口）的布局与规范，脑机接口与新型肿瘤药物等文件，国家层面高度关注AI算法的“养料”——</span><strong><span>高质量数据集</span></strong><span>的规范化。这为我们数据服务、数据标注和治理业务提供了明确的政策依据和市场机会</span></p><p><span>4.以“国考”与试点确保政策执行，公立医院绩效考核、绩效检测等文件，持续强化和驱动医院变革。国考更与我们信息化背景和大模型时代 AI 驱动提供了充足的业务融合点。</span></p><ul><li><p><span>数据上报是刚需： 参加“国考”的前提是能够按照《操作手册》的要求，及时、准确、完整地提交大量运营和临床数据。这迫使所有等级医院必须投资建设或升级其医院信息系统（HIS）、电子病历（EMR）和数据中心（CDR）。</span></p></li><li><p><span>数据质量定成绩： “国考”的诸多指标（如DRG/DIP支付、病案首页质量、电子病历应用水平、医疗质量安全等）直接与数据质量挂钩。这催生了对临床数据治理、病案质控软件、数据分析与可视化平台的需求。</span></p></li><li><p><span>结果应用驱动持续投入： “国考”结果与医院的评级、补贴、院长任免等直接相关，形成了强大的激励与压力，促使医院管理者将信息化和数据应用视为核心战略，而非辅助工具。</span></p></li></ul><p><span>5.试点项目和专项资金，催化探索前沿技术与变革。综合试验区和重点研发计划等政策的出台，为探索新技术、新模式（如基于大数据的慢病管理、AI家庭医生助手）提供了绝佳理论指导，专项资金的注入也为医疗AI、大数据平台、新一代医疗信息系统等业务方向注入了新的活力。</span></p><h3 id='12-技术发展趋势'><span>1.2 技术发展趋势</span></h3><p><span>生成式AI与大语言模型（LLM）正在渗透到医疗健康价值链的各个环节，进入了实质性的医教研管四大场景。当前的应用价值主要体现在</span></p><ul><li><p><span>临床工作流增强：AI在辅助诊断方面表现卓越，例如在识别恶性肿瘤方面已能超越放射科医生，并能高效解读脑部扫描、精准识别骨折。更具前瞻性的是，AI能够通过分析医疗数据，提前数年预测特定疾病的风险，如阿尔茨海默病。大语言模型在临床推理方面也展现出专家级水平。  </span></p></li><li><p><span>运营与科研加速：AI显著提升了医疗机构的运营效率。例如，通过自动化处理临床文档等行政任务，极大减轻了医护人员的负担 。在科研领域，AI能将科研论文的产出周期从6-12个月缩短至1-2个月，并将大型医院进行数据治理的时间从8-12个月压缩至4-6个月。  </span></p></li><li><p><span>患者服务与互动：面向患者的应用，AI 可以提供初步健康咨询、个性化健康管理，并能将复杂的放射学报告转化为通俗易懂的语言，改善医患沟通。</span></p></li></ul><p><span>以上几个场景，我们都有涉及和布局，但同时我们作为医疗 AI 的先行者也清晰认识到当前存在的挑战和局限，这有助于我们可以深入分析业务增长点，避免过热而忽略风险。</span></p><ul><li><p><span>“幻觉”与“黑箱”问题：大模型有时会生成与事实不符或毫无意义的“幻觉”内容，这在要求高度严谨的临床环境中是不可接受的。同时，其“黑箱”特性使得模型的决策过程难以解释，降低了临床医生的信任度。  这方面的布局需要从数据溯源和可解释性 AI 方面进行发力。</span></p></li><li><p><span>认知偏见风险：大语言模型与人类一样，容易受到认知偏见的影响，如“框架效应”、“首因效应”和“后见之明偏见”，这可能导致其在特定情境下给出有偏差的医疗建议。  这方面需要在医疗领域强化学习和继续训练，从而进行价值或偏好对齐。这也是我们垂域大数据公司的价值增长点。</span></p></li><li><p><span>认知价值到商业价值转化：将一个有前景的AI算法转化为一个可收费、获监管批准的医疗服务，是一个漫长而复杂的过程。目前工业大模型尤其是医疗大模型领域，其基本还处于试用甚至是概念阶段，其转换为严谨医疗场景下的服务尚有距离。</span></p></li></ul><p><span>未来的大模型发展轨迹主要集中于可溯源、可解释、全模态支持等方向</span></p><ul><li><p><span>技术路径优化：大模型的融合和优化多种技术，如利用“检索增强生成”（RAG）技术将模型输出与可靠的医学知识库对齐，通过“基于人类反馈的强化学习”（RLHF）使模型行为更符合临床伦理和价值观，以及在特定医疗领域数据上进行微调，以提升专业性和准确性。  </span></p></li><li><p><span>标准化评估体系建设：业界迫切需要建立一套统一、全面的评估基准。这套基准应超越目前局限于封闭式问答的准确率评估，转而关注模型在模拟真实世界、开放式临床推理场景下的综合表现。  </span></p></li><li><p><span>向多模态大模型演进：单一的文本处理能力已无法满足复杂的临床需求。未来的发展方向是多模态大语言模型（M-LLM），它能够同时理解和处理文本、医学影像、基因序列、病理切片等多种类型的数据，从而实现对患者状况的全面分析。</span></p></li></ul><p><span>越“应用级”价值体现越直接：基于自身积累数据的特性，搭载大模型技术，推出我们数据服务环节的医疗大模型。</span></p><p><span>	</span><span>作为医疗健康领域的先行者，将其分为三类：通用大模型提供基础的语言理解和推理能力；在此基础上，经过广泛医疗数据训练的垂直大模型，因其高安全性和可靠性成为我们行业的核心，可直接应用或作为开发更精细化模型的基石；而针对特定场景和任务，融入专业数据与专家逻辑深度训练的应用类大模型，则是我们实现精准医疗、提升服务效率和患者体验的关键。</span></p><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141651720.png" referrerpolicy="no-referrer" alt="image-20250717150047021"></p><p><span>医疗 AI 发展现行框架及启示</span></p><figure class='table-figure'><table><thead><tr><th style='text-align:left;' ><span>政策/标准名称</span></th><th style='text-align:left;' ><span>签发机构</span></th><th style='text-align:left;' ><span>核心目标</span></th><th style='text-align:left;' ><span>战略启示</span></th></tr></thead><tbody><tr><td style='text-align:left;' ><span>《公立医院高质量发展促进行动》</span></td><td style='text-align:left;' ><span>国家卫健委、国家中医药管理局</span></td><td style='text-align:left;' ><span>建设“三位一体”智慧医院，提升医疗服务智慧化、个性化水平。</span></td><td style='text-align:left;' ><span>创造了对智慧医院IT解决方案（如AI辅助诊疗、智慧管理系统）的巨大市场需求。</span></td></tr><tr><td style='text-align:left;' ><span>《生成式人工智能服务管理暂行办法》</span></td><td style='text-align:left;' ><span>国家网信办等七部门</span></td><td style='text-align:left;' ><span>促进生成式AI健康发展和规范应用，明确服务提供者责任。</span></td><td style='text-align:left;' ><span>为提供医疗大模型服务的企业设定了内容审核、数据安全、算法备案等基础合规底线。</span></td></tr><tr><td style='text-align:left;' ><span>YY/T 1833系列标准</span></td><td style='text-align:left;' ><span>国家药品监督管理局（NMPA）</span></td><td style='text-align:left;' ><span>规范人工智能医疗器械的质量要求与评价，涵盖术语、数据、模型等。</span></td><td style='text-align:left;' ><span>为AI医疗器械的研发、测试和注册审批提供了具体的、必须遵循的技术指引和评价依据。</span></td></tr><tr><td style='text-align:left;' ><span>《国家人工智能产业综合标准化体系建设指南》</span></td><td style='text-align:left;' ><span>工信部等部门</span></td><td style='text-align:left;' ><span>基础共性、关键技术（含大模型）、行业应用（含医疗健康）到安全/治理，构建了全面的标准框架</span></td><td style='text-align:left;' ><span>为医疗健康行业，AI 技术的发展和应用，提供了基本框架和技术指导。</span></td></tr><tr><td style='text-align:left;' ><span>卫生健康行业人工智能应用场景参考指引</span></td><td style='text-align:left;' ><span>卫健委、中医药局、疾控局</span></td><td style='text-align:left;' ><span>明确84个AI应用场景，其中19个场景明确提及大模型应用。</span></td><td style='text-align:left;' ><span>为医疗大模型应用场景提供参考示例</span></td></tr><tr><td style='text-align:left;' ><span>政府工作报告</span></td><td style='text-align:left;' ><span>国务院</span></td><td style='text-align:left;' ><span>特续推进“人工智能+”行动，支持大模型在垂直领域的开发和应用。加快人工智能在包括医疗健康在内的多场景应用</span></td><td style='text-align:left;' ><span>医疗大模型相关工作政府工作重点领域。</span></td></tr></tbody></table></figure><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141713578.png" referrerpolicy="no-referrer" alt="image-20250717151052226"></p><h3 id='13-市场需求变化'><span>1.3 市场需求变化</span></h3><p><span>根据动脉智库统计，我国数字健康赛道已经达到 400 亿美元，另赛迪统计我国医疗大模型市场当前规模已达82亿元人民币，并预计在2024至2027年间进入高速发展期，届时市场规模有望突破260亿元。放眼全球，根据Data Bridge 的测算，预计至2031 年全球生成式AI 在医疗保健领域市场规模将达到172 亿美元，2023-2031 年期间复合增长率为32.60%。2025年，人工智能在医疗行业的应用市场规模预计将占据整个人工智能应用市场的五分之一，彰显其巨大的经济潜力。这一趋势已获得广泛的市场认同和参与。</span></p><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141721584.png" referrerpolicy="no-referrer" alt="image-20250717143943906"></p><p>&nbsp;</p><p><span>根据动脉智库统计，截止2025年 5 月，市面上已公开的主要医疗大模型案例累计288 个，其中约有九成以上医疗大模型应用场景均涵盖于《卫生健康行业人工智能应用场景参考指引》之中，涉及应用场景12 类，所有应用场景总提及频次814 次。其中医疗服务场景涉及的大模型最多，总提及频次达430 次，占比近53%。医疗服务场景成为AI 大模型的重要应用场景。</span></p><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141725867.png" referrerpolicy="no-referrer" alt="image-20250717151645685"></p><p><span>12 类应用场景中共涵盖56 个细分领域，其中，临床专病辅助决策、预问诊、病历辅助生成、医学影像辅助诊断提及最多，均为医疗服务大类</span></p><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141729105.png" referrerpolicy="no-referrer" alt="image-20250717152224759"></p><h3 id='14--2025-年以来大模型医疗相关招投标市场分析报告'><span>1.4  2025 年以来大模型、医疗相关招投标市场分析报告</span></h3><ul><li><p><span>引用 Excel文件分析或参考已经完成的数据分析报告</span><a href='https://asunfly.github.io//img-bed/Large%20Model%20Bid%20Analysis%20Report.html' target='_blank' class='url'>https://asunfly.github.io//img-bed/Large%20Model%20Bid%20Analysis%20Report.html</a></p></li></ul><iframe 
+  src="https://asunfly.github.io//img-bed/Large%20Model%20Bid%20Analysis%20Report.html" 
+  width="100%" 
+  height="1000" 
+  style="border:none;">
+</iframe><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><h2 id='二市场竞争格局分析'><span>二、市场竞争格局分析</span></h2><p><span>从我们医疗信息化厂商的角度看，当前的“百模大战”意味着AI正从一个遥远的技术概念，迅速变为我们必须应对的市场现实。开源大模型虽然降低了技术门槛，但也引来了互联网巨头、AI新锐等众多跨界竞争者，加剧了市场的复杂性。我们认为，喧嚣的技术比拼之下，真正的决胜点并非模型本身，而是如何跨越数据合规、临床验证与安全性的“高墙”，并将AI能力无缝嵌入我们所熟知的HIS/EMR等核心工作流中。因此，我们的核心战略是发挥自身对临床流程的深刻理解和数据治理的优势，专注将AI技术转化为能证明其临床与经济价值、合规可靠的一体化解决方案，从而在这场注定会走向整合的竞赛中，将技术“产品”真正落地为客户愿意买单的“商品”。</span></p><h3 id='21-主要竞争者分类'><span>2.1 主要竞争者分类</span></h3><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141735915.png" referrerpolicy="no-referrer" alt="image-20250718143623320"></p><h4 id='211-按企业类型'><span>2.1.1 按企业类型</span></h4><p><span>市场的参与者可以根据其核心业务基因、资源禀赋和市场切入策略，划分为七大主要类别。每个类别都拥有其独特的竞争优势和天然的局限性，这些因素共同塑造了它们在医疗大模型领域的战略打法。</span></p><p><strong><span>1.传统医疗信息化厂商</span></strong><span>：长期深耕医院IT系统的企业正积极拥抱大模型技术，对现有产品赋能升级。凭借深厚的医院资源和数据积累，将AI大模型嵌入主营业务，实现存量客户价值升级。</span></p><ul><li><p><span>卫宁健康发布了医疗大语言模型 WiNGPT 2.8 及 “WiNEX Copilot” 医护助手，覆盖临床、护理、医技等场景以增强电子病历、质控等能力。</span></p></li><li><p><span>东软集团在智慧医疗解决方案中引入开源大模型DeepSeek，通过知识蒸馏技术优化预问诊、病历生成质控等核心应用。</span></p></li><li><p><span>创业慧康自研 MedCopilot实现出院小结秒级生成并用于临床决策支持和病历质控，正确率超过95% ；其 BsoftGPT 平台聚合调用多种通用大模型（如DeepSeek、通义千问、讯飞星火、文心一言等）并结合本地知识库微调，支持不同医疗场景按需切换最适模型。</span></p></li><li><p><span>我们则在电子病历平台中深度接入自研医疗大模型，用AI助手贯穿诊前诊后，实现自动病历生成、诊断预测、个性化方案推荐和质控全流程覆盖，并已正式接入开源大模型DeepSeek以加速创新应用。</span></p></li></ul><p><strong><span>2.互联网医疗平台：</span></strong><span>在线医疗服务平台依托海量用户和数据，布局大模型提升诊疗服务品质。它们凭借流量和生态优势，将大模型融入在线问诊、健康管理等业务，实现服务升级和规模化落地。</span></p><ul><li><p><span>平安好医生通过AI辅诊平台等项目打造“导诊+收集病史+结构化病历”一站式服务；其智能问诊已接入大模型，可覆盖3000+种疾病提供分诊导诊、用药监测等功能。</span></p></li><li><p><span>京东健康研发医疗大模型“京医千询”并在2025年初宣布全面开源，以透明架构展示技术实力，期望通过共建推动行业应用落地。该平台推出面向C端的AI健康助手“京东康康”，上线半年服务超3000万人次，问题解决率达70%，为线上医疗服务提供了新入口。</span></p></li><li><p><span>阿里健康则依托阿里云通义大模型，在医药咨询、慢病管理等场景探索AI应用。据统计，互联网巨头积极布局医疗大模型，加速AI在医疗领域的发展和应用</span></p></li><li><p><span>腾讯以自研的腾讯混元大模型为基石，全面布局智慧医疗，其腾讯觅影已发展为国家级医疗影像AI平台并获得多项医疗器械三类证，同时将AI融入患者就诊全流程，如智能导诊、在线问诊和智能随访，并与医院合作开发医疗大模型（如瑞金医疗大模型），推出“健康管理助手”智能体和全球首个重症医疗大模型“启元重症大模型”，服务已在全国近万家医疗机构落地。</span></p></li><li><p><span>百度以文心大模型为核心，深度布局智慧医疗，发布了首个“产业级”医疗大模型——灵医大模型，并面向大健康产业开放。其灵医Bot为患者提供智能分导诊、用药指导等服务，为医生提供病历生成、辅助诊疗；同时，百度智能云灵医智惠临床辅助决策系统（CDSS）已在全国大量医院应用，并推出了“AI眼底影像分析系统”和“健康智能体家族”（如AI用药助手），累计服务亿万用户。</span></p></li></ul><p><strong><span>3.AI医疗科技公司：</span></strong><span>专注医疗AI的创新企业成为大模型时代的重要力量。这类AI科技公司凭借技术创新和数据积累，快速推出垂直大模型产品，在细分赛道形成差异化竞争优势。</span></p><ul><li><p><span>科大讯飞医疗是行业领军者，已于2024年底在港股上市成为“大模型第一股”，构建了覆盖政务、医院、居民多元场景的产品矩阵，提供健康预警、早筛、辅助诊断、随访管理等服务。2023年10月讯飞发布星火医疗大模型及个人健康助手“讯飞晓医”，2024年升级至2.0并推出医学影像大模型，2025年3月发布深度推理架构的星火医疗大模型X1，在知识问答、文书生成、诊疗推荐等指标上已超越GPT-4 Turbo，同年4月又推动“智医助理”在基层医疗的全面升级。截至2024年初，讯飞“智医助理”已覆盖全国30多个省的400多个区县常态化应用，提供辅助诊断建议超过7.4亿条、电子病历标准化建议2.8亿条，纠正诊断超130万例，显著提升基层诊疗规范性。</span></p></li><li><p><span>另一独角兽医渡科技依托医疗大数据优势打造AI中台，将自研大模型与开源模型深度整合，训练效率提升25%，关键任务准确率提高5%～20%，应用上线周期缩短50%。医渡科技为行业提供“大数据+大模型”双中台，医生可在平台上自主构建“小模型”和智能体，目前已在20余家三甲医院上线，80%用户为医生，自建智能体用于诊疗、科研、教学，日常工作流的使用率极高。</span></p></li><li><p><span>此外，森亿智能、惠每科技、数坤科技等企业在医学影像、病理AI、临床研究等垂直领域推出自有大模型或应用，性能不断突破。例如数坤科技发布多模态医疗大模型“数坤坤”，融合文本、影像、视频等数据，已成功应用于影像、超声、全院管理等场景，并在权威评测中名列前茅（如CMB、MedBench双榜第一） 。</span></p></li></ul><p><strong><span>4.三大运营商：</span></strong><span>电信运营商依托算力和网络优势，积极布局行业AI大模型，涉足医疗场景。总体来看，运营商发挥“国家队”优势，在医疗AI新基建和行业方案上发力，有望构建医疗大模型生态底座。</span></p><ul><li><p><span>中国移动推出了“九天·医疗大模型”，基于其通用大模型基座对亿级医学数据增量预训练和微调，具备医学问答、报告生成、信息抽取等能力，专业水平已超过有3年经验的执业医生，可用于全科助手和专科疾病管理。该模型在院前急救、院中会诊等场景实现应用验证，如智能提取急救呼叫信息提升调度效率30%，生成院前病历、指导急救措施将救治时间提前约15分钟。</span></p></li><li><p><span>中国电信、中国联通也在结合各自云平台推出医疗大模型解决方案，联合医院和科技企业开展应用试点。三大运营商的加入为医疗AI提供了“云+网+端”的基础设施支撑，通过算力一体机等方式降低基层部署门槛，助力大模型在医疗行业的普及。例如，运营商与华为等合作推出内置医疗大模型的智算一体机，部署便捷且优化算力性能，推动基层医疗更易用上大模型。</span></p></li></ul><p><strong><span>5.国内头部科技企业：</span></strong><span>一线科技公司利用通用大模型技术切入医疗领域，形成重要竞争力量。国内科技巨头和开源社区提供通用大模型能力，为医疗行业参与者赋能；其强大的研发实力和生态协同，加之像DeepSeek这样的开源先锋，使医疗大模型进入快速迭代、广泛渗透的新阶段。</span></p><ul><li><p><span>腾讯依托混元大模型布局医疗业务，微信生态近期已接入开源模型DeepSeek，探索医疗客服助手等应用。</span></p></li><li><p><span>百度以文心大模型为基础，推出医学问答、药物研发等解决方案，并与医联体机构合作培训医疗垂直模型。</span></p></li><li><p><span>阿里云的通义大模型也衍生医疗版本，用于临床决策支持和医患对话。</span></p></li><li><p><span>创业公司百川智能开源了百川大模型系列，其参数规模和性能在国内领先，也被医疗机构拿来做本地化训练。</span></p></li><li><p><span>DeepSeek 模型作为国内开源大模型代表，于2024年底问世，参数规模高达6710亿但采用MoE架构大幅降低有效算力，仅以不到GPT-4十分之一的成本完成训练。DeepSeek性能优异，在开放测试中接近GPT-4和Claude等水平。更重要的是，DeepSeek具备高性能、低成本、开源三大特征，极大契合医疗机构对高效、安全可控AI的需求。其API价格远低于GPT-4等闭源模型（如每百万tokens输入0.5～2元、输出8元） ，“白菜价”的使用成本使AI服务从三甲医院试点拓展到基层普惠应用成为可能。同时开源代码允许医院自由下载并本地部署，避免云端调用的敏感数据安全顾虑。目前已有多家医院宣布完成DeepSeek本地部署，将其融入导诊、报告解读、临床助手、病历质控等应用中。</span></p></li></ul><p><strong><span>6.跨界科技巨头：</span></strong><span>国际科技公司凭借领先的AI技术和云平台，亦参与医疗大模型竞逐。跨界科技巨头在算法、算力和资金上实力雄厚，他们的进入促进行业百花齐放，也加剧了全球医疗AI领域的竞争。不过，由于国内医疗数据和监管环境特殊，这些跨国企业多通过与本土机构合作或开源框架间接参与。</span></p><ul><li><p><span>微软旗下Nuance推出了结合OpenAI GPT-4的临床文档生成应用DAX Express，实现就诊对话自动“听写”病历，在患者离开几秒内生成临床记录草稿，大幅减轻医生记录负担。Nuance已有超55万名医生用户，其AI记笔工具通过GPT-4赋能后进一步提升了准确性，并已在数百家医疗系统中部署。</span></p></li><li><p><span>IBM依托多年积累的Watson健康知识图谱，正在以新一代大模型（如Watson X）提供医学研究助理、影像分析等服务。</span></p></li><li><p><span>亚马逊云服务（AWS）则推出医疗AI平台（如HealthLake等）并支持客户部署专属大模型用于医疗文本分析和预测。</span></p></li><li><p><span>英伟达从底层GPU算力和Clara医疗平台入手，通过投资Recursion、Tempus等医疗AI企业，构建药物研发、影像分析等全链条生态。海外巨头的加入为医疗大模型提供了底层技术和资金支持，也带来先进的产品理念。例如英伟达投资的Abridge开发了AI听诊记录工具，可自动将诊疗对话转录为结构化病历。</span></p></li><li><p><span>微软、谷歌等也开放云上大模型API供医疗机构调用。</span></p></li></ul><p><strong><span>7.科研院所：</span></strong><span>高校和研究机构利用学术力量和临床资源，在医疗大模型创新中扮演关键角色。科研院所凭借深厚的理论和人才储备，正通过开源模型、校企合作等方式推动医疗大模型的技术突破和应用扩展。</span></p><ul><li><p><span>中科院等研究所牵头建设医学大模型基础框架，并与企业合作开展应用验证。</span></p></li><li><p><span>浙江大学发布了启真医学教育大模型，融合医学知识库构建智能教学助手，用于自主学习、教学活动、考核评价和教学质量监控等环节，已在全国学科大模型会议上分享经验。浙大团队还开发了OmniPT病理大模型，针对病理影像实现癌症区域分割Dice系数0.93、癌栓检测准确率97%等业界领先水平，并支持病理报告一键生成和图像问答。</span></p></li><li><p><span>科研机构通常与医院密切合作，共建垂直大模型：据统计，截至2025年5月，医院参与或自主开发的垂直医疗模型已达55个，占比大幅上升，其中医院与高校/科研院所联合模式的项目自2025年初开始激增。这表明在大模型时代“产学研医”协同创新成为趋势，顶尖医院和院校正发挥更大作用。</span></p></li><li><p><span>研究单位擅长前沿算法探索和开源分享，如北京大学等推出医学中文大模型Med-GPT，上海AI实验室开源了医药分子大模型等。这些开放成果为行业提供了试验平台和人才支撑。</span></p></li></ul><h4 id='212-按产品领域'><span>2.1.2 按产品领域</span></h4><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141743355.png" referrerpolicy="no-referrer" alt="image-20250718150813028"></p><p><strong><span>1.智慧临床：</span></strong><span>这是医疗大模型应用最广的领域，包括临床决策支持、病历与质控、医学影像辅助诊断等。智慧临床领域的大模型应用百花齐放：诊前有智能导诊、分诊，诊中有AI辅助诊疗、术中决策支持，诊后有智能随访、慢病管理等，覆盖了医院医疗服务的各个环节。这些应用直接服务于提质增效和提高诊疗准确性，是当前商业化跑通最快的方向。</span></p><p><span>	</span><span>调研显示，在所有医疗大模型应用中，“医疗服务”环节被提及最频繁，占比高达53%，其中又以临床专科诊疗辅助决策、智能预问诊、病历自动生成、医学影像诊断辅助为主要场景，位居前四。</span></p><p><span>具体而言，临床决策支持（CDSS）方面，大模型可根据海量指南和病例提供诊断思路、用药建议，弥补医生知识盲区。例如行心科技的CDSS系统已可根据症状列出相关疾病和治疗方案备选，让医生决策更有依据。病历质控方面，大模型能自动发现病历中的不规范用语或遗漏项目。</span></p><p><span>	</span><span>我们基于其质控知识库，将AI深度融入电子病历V7平台，实现病历书写全过程的智能质控提醒。医学影像则是AI医疗最成熟的领域之一，已形成从图像采集、处理到诊断的全流程价值体系。</span></p><p><span>	</span><span>大模型对影像的赋能体现在更强的多模态理解能力：2024年讯飞发布的星火医学影像大模型结合安徽省亿级影像数据，打造智慧影像助手，覆盖影像质控、诊断、读片全流程，提高读片效率和准确性。在细分领域，超声和病理这两类影像AI取得重要突破：如脉得智能训练的超声大模型在甲状腺结节良恶性判别上准确率达96%，已获国家三类证并落地500余家医院；透彻未来、医策科技等推出病理大模型，大幅提升癌症筛查和报告生成效率。借助大模型的多模态能力，影像诊断正从聚焦单部位辅助，进化到全病程管理和跨模态融合诊断。</span></p><p>&nbsp;</p><p><strong><span>2.智慧教学：</span></strong><span>医学教育与培训是大模型崭露头角的另一领域。一方面，大模型可化身教学助手，帮助医学生和医生获取知识、模拟实训。这一领域的应用相对成熟，已有多款教学产品落地，为医学院校和医院培养人才提供了新工具。</span></p><p><span>	</span><span>浙江大学研制的启真智医AI教学平台即以医学教育大模型为核心，针对不同教学场景构建智能体，利用多模态教学数据实现自主学习、教学活动、考试评价、教学质量监控全流程辅助。该平台已经在权威媒体上报道，并在全国性会议上分享经验。另一方面，大模型还可用于医学继续教育和科普。例如“智医助理”不仅通过考试证明了其医学知识水平（2017年曾以456分通过国家医师资格综合笔试，超过96.3%考生），如今在基层实践中也用于指导全科医生标准化诊疗，有效提升其常见病诊疗水平和合理用药能力。</span></p><p><span>	</span><span>对于患者，大模型驱动的虚拟健康顾问则能提供科普问答、健康档案管理等功能，提高公众健康素养。随着医学知识的指数增长，AI大模型正扮演“AI老师”的角色，将海量知识可计算化，实现因材施教。例如启真的医学大模型每日可从数万份报告中分析全院病例，精准识别需跟踪的重点患者，实现对实习医生的指导和对漏诊患者的召回。未来，结合VR/AR的虚拟病例、大模型驱动的智能考试出题和评分系统等都将出现，使医学教学培训更加个性化、高效化。</span></p><p>&nbsp;</p><p><strong><span>3.智慧科研：</span></strong><span>在医学科研和新药研发领域，大模型同样大有可为。医疗大模型可以充当“研究助理”，在海量文献、临床数据中挖掘知识，加速真实世界研究和科研创新。智慧科研领域的大模型尚处于起步阶段，但前景广阔：它几乎具备了科研全流程的辅助能力，从灵感产生、文献综述、实验设计直到结果分析，都能提供支持。随着高质量数据累积和专家经验注入，医疗大模型有望成为科研人员不可或缺的“AI助手”，极大加速医学创新步伐。</span></p><p><span>	</span><span>医渡科技构建的医学数据智能平台收录海量患者病历数据，通过引入DeepSeek等顶尖大模型，大幅提升了科研算力效能和模型能力。医生和研究者可利用这一平台快速筛选患者、进行回顾性研究，从而开展真实世界证据研究（RWE）。据报道，大模型已在一些医院帮助科研人员数小时内解读全院检查报告并发出预警提示，相当于把繁琐的数据整理分析工作自动化。</span></p><p><span>	</span><span>药物研发方面，生成式AI模型可以在分子设计、蛋白质结构预测上提供颠覆性效率提升。例如晶泰科技（XtalPi）将量子物理与AI结合，开发了小分子药物发现大模型平台、抗体发现平台等，为候选药物筛选提速。大模型可以学习海量分子性质和药理知识，生成新分子结构或优化组合，提高新药命中率并减少实验次数。实际上，生物医药模型已成为AI制药公司的核心竞争力之一，多家企业争相训练更大的分子大模型。</span></p><p><span>	</span><span>此外，大模型在科研数据平台中的应用还包括临床试验智能匹配、医学论文辅助撰写、科研项目申报材料自动生成等。值得注意的是，医学知识库+大模型的融合将突破传统检索的限制，使“所有知识可计算”成为可能。例如将专业医学知识图谱融入大模型，可以让AI从语义层面理解研究问题而非简单关键词匹配，从而发现隐含关联。</span></p><p>&nbsp;</p><h3 id='22-市场份额与集中度'><span>2.2 市场份额与集中度</span></h3><p><strong><span>1.市场规模及渗透率：</span></strong><span>医疗大模型市场当前正处于高速成长的蓝海阶段，市场规模迅速扩张但渗透率仍较低。据亿欧智库测算，目前我国医疗大模型市场规模约为20亿元，预计将以年均140%左右的高速增长，到2028年突破百亿元大关。这一增长趋势与全球类似：DataBridge预计2031年全球医疗保健领域生成式AI市场可达172亿美元，2023–2031年年复合增速32.6% 。然而，与潜在需求相比，目前大模型在医疗的总体渗透率估计不足10%～20%，尚处于应用初期。这意味着巨大的增量市场有待开拓。性能的突破正不断拉高市场天花板，而低渗透率则体现出推广的空间和挑战并存。要将“想用”“能用”的需求转化为实际应用，仍需要在验证效果、安全监管等方面取得突破。</span></p><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141748590.png" referrerpolicy="no-referrer" alt="image-20250718151836065"></p><p><strong><span>2.竞争格局与集中度：</span></strong><span>当前医疗大模型领域呈现“百模大战”的局面，竞争者众多且类型多元化，市场集中度相对分散。截至2025年5月初，国内已发布医疗大模型133个，远超2024年全年的94个和2023年的61个，总计可统计的大模型约288个。其中90%覆盖了政策指引的重点应用场景，可见各家布局方向与政策导向基本一致，场景竞争十分充分。从行业分布看，医疗健康已成为中国行业大模型最活跃的领域之一——截至2023年底，中国行业大模型中医疗领域占比达21.9%，位居首位，超过金融领域的12.8% 。这说明大量技术和资本正涌入医疗AI赛道。不过，虽然参与者众多，但目前尚未出现绝对垄断的巨头，一方面因为医疗场景复杂多样，各细分领域都有不同领先者；另一方面大模型尚未完全成熟，厂家还在跑马圈地阶段。</span></p><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141752016.png" referrerpolicy="no-referrer" alt="image-20250718151956407"></p><p><span>以医院信息化市场为例，传统厂商占有较大优势：我们的电子病历系统市占率已连续十一年居国内第一，是名副其实的“电子病历之星” 。卫宁健康、东软集团、创业慧康等老牌厂商在HIS、区域健康平台等领域也拥有稳固市场基础。这部分市场集中度较高，头部几家公司瓜分了主要份额。</span></p><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141757917.png" referrerpolicy="no-referrer" alt="image-20250718152246403"></p><p><span>但在AI大模型应用的新兴市场，局面更分散。例如智能影像赛道，涌现出上百款AI产品和数十家创业公司，涵盖不同影像部位和病种；又如智能问诊与辅助诊疗赛道，不仅BAT等大厂参与，还有丁香园等互联网医疗、新创公司等纷纷推出自研模型。同质化竞争和差异化探索并存。整体来看，目前医疗大模型市场尚处群雄逐鹿阶段，集中度相对低，呈现“大企业有平台、小企业有特色”的竞争格局。各类玩家利用自身禀赋切入细分市场：医疗IT龙头依托存量客户加速推广AI模块，AI独角兽凭技术抢占制高点，互联网平台靠流量入口吸引用户，科研院所输出开源模型赋能行业。短期内难以出现一家通吃所有场景的局面，更多是优势企业在各自细分领域形成领先。</span></p><p>&nbsp;</p><p><strong><span>3.主要玩家市场份额实例：</span></strong><span>从具体细分市场看，一些领域领先者已经占据显著份额。头部玩家加速跑马圈地，市场集中度未来将随着优胜劣汰而提高。一旦大模型产品力和安全性得到验证，具备资源和资金优势的领军企业有望迅速扩大市场份额，行业或将进入新一轮整合。</span></p><p><img src="https://raw.githubusercontent.com/Asunfly/img-bed/master/img20250721141801569.png" referrerpolicy="no-referrer" alt="image-20250718153006758"></p><ul><li><p><span>在医院临床信息系统市场，卫宁健康、东软、嘉和、创业慧康等前几名厂商合计份额超过60%，我们单在电子病历细分就蝉联第一。</span></p></li><li><p><span>在AI影像领域，据医疗AI产业联盟数据，排名前5的企业市场覆盖率约在40%左右，数坤科技、依图医疗（现为联影智能子公司）、推想医疗、汇医慧影等各有所长。</span></p></li><li><p><span>在语音电子病历和智能问诊领域，科大讯飞市场份额领先：其语音识别占有率曾高达70%，“讯飞晓医”数字健康助手App下载量已达1200万次，用户好评率98.8% 。截至2025年4月，讯飞“智医助理”已经推广至全国31个省市的约7.3万家基层医疗机构，服务基层医生22万人，累计提供超过9.7亿次AI辅助诊断建议。</span></p></li><li><p><span>在医药研发赛道，XtalPi晶泰科技、百图生科等AI新药公司已占据国内较高市场关注度，获得大量融资和合作订单。尤其晶泰不仅提供新药分子设计AI，还拓展自动化合成实验室服务，业务已覆盖几十家药企。</span></p></li><li><p><span>至于互联网平台的市场份额，平安健康（平安好医生）在国内互联网医疗中MAU稳居前二，其AI辅诊功能每日服务问诊量巨大；京东健康的“京医千询”虽刚推出即宣布开源，但京东在处方药电商、慢病管理等领域用户规模领先，也为其AI服务提供了天然市场。</span></p></li><li><p><span>可以预见，随着应用逐步落地，各细分赛道可能出现“一超多强”格局：例如医学影像赛道有望形成数坤科技一家独占一定高端市场份额，其他公司分享剩余市场的状态（数坤坤大模型已在多地三甲医院落地，并与华为合作推出开箱即用的一体机方案，占据技术制高点）；</span></p></li><li><p><span>智能问诊赛道则可能由拥有最大用户基数的平台（腾讯、阿里等）占领先机，而技术驱动型公司通过与医院深度合作占据专业市场。</span></p></li></ul><h3 id='23-竞争态势总结'><span>2.3 竞争态势总结</span></h3><p><span>	</span><span>作为一家深耕医疗信息化的厂商，我们对当前医疗AI大模型市场的感受是既兴奋又清醒。过去，AI在医疗领域听起来还比较遥远，但现在，它正以前所未有的速度变成我们客户（医院）的实际需求。一方面，像DeepSeek这类高性能、低成本的开源大模型出现，确实大大降低了AI的技术门槛，让更多团队能参与进来。同时，国家政策也给AI在医疗领域的应用指明了方向，这让我们更有信心去推广和落地。然而，这种繁荣背后也伴随着激烈的竞争，大家都想分一杯羹，导致市场上出现了所谓的“百模大战”。我们看到很多产品功能相似，甚至出现了价格竞争。更关键的是，我们发现医疗AI要真正被医院大规模采用，还面临几个实实在在的难题：</span></p><ul><li><p><span>高质量、合规的医疗数据是稀缺资源。医院的数据分散、敏感，要收集、整理和标注好，投入巨大，而且必须严格遵守隐私保护法规。这是我们最核心的资产，也是别人很难短时间复制的壁垒。</span></p></li><li><p><span>目前最大的阻碍，就是还没有一套公认的、权威的标准来证明医疗AI模型的实际效果和安全性。我们的AI产品就算技术再好，如果拿不出让医院和监管部门信服的临床验证数据，就很难从“产品”真正变成可以大规模销售的“商品”。这就像我们造了一辆好车，但没有驾照和上路许可，车就开不出去。</span></p></li></ul><h2 id='三产品竞争战略框架'><span>三、产品竞争战略框架</span></h2><p><span>	</span><span>面对医疗 AI 挑战，我们不能盲目跟着“百模大战”去拼通用大模型，而是要发挥我们自己独特的优势，找到一条务实可行的破局之路：</span></p><h3 id='31-产品差异化定位'><span>3.1 产品差异化定位</span></h3><p><span>	</span><span>当前市场上很多医疗AI产品仍停留在“好看不好用”的阶段，或是过度强调模型技术本身。我们的差异化定位，核心在于：</span></p><ul><li><p><strong><span>聚焦“最后一公里”的深度融合：</span></strong><span> 不追求通用大模型的研发，而是将先进的AI能力，无缝嵌入到医院现有的EMR、CDSS等核心信息化系统中。这意味着我们的AI不是一个独立的应用，而是医生、护士日常工作流程中的“隐形助手”，比如在医生写病历时自动生成初稿，在审方时智能提示风险。我们的目标是让AI真正成为医护人员的“数字同事”，而不是一个额外的负担。</span></p></li><li><p><strong><span>提供可量化的临床和经济价值：</span></strong><span> 我们要摆脱单纯比拼模型性能的阶段，转而强调AI产品能为医院带来实实在在的效益。比如，我们的AI能帮助医生提升多少诊断准确率，能为医院节约多少运营成本，能缩短多少患者等待时间。我们相信，只有能拿出明确数据证明价值的产品，才能在市场中脱颖而出。</span></p></li><li><p><strong><span>坚守数据安全与合规的底线：</span></strong><span> 医疗数据极其敏感，医院最关心数据安全。我们应该主打“数据不出院”和本地化部署模式，确保所有数据处理都严格遵守国家法规，打消医院的后顾之忧。高质量、合规的数据资产，本身就是我们最核心的差异化壁垒。</span></p></li></ul><h3 id='32-技术差异化路径'><span>3.2 技术差异化路径</span></h3><ul><li><p><strong><span>拥抱“大模型+小模型”的组合拳：</span></strong><span> 我们不应该从零开始构建通用大模型，而是充分利用像DeepSeek这类高性能、可私有化部署的开源大模型作为基础，在此之上，结合对临床场景的深刻理解，通过微调和定制，开发出针对特定科室或特定任务的“小模型”。这种模式既能获得通用大模型的基础能力，又能确保AI在具体医疗场景中的精准性和实用性。</span></p></li><li><p><strong><span>强化数据治理与标注能力：</span></strong><span> 医疗数据是AI的“燃料”。我们应持续投入，建立更完善的数据治理体系，确保数据的清洗、标注和标准化质量。高价值的“干净数据”是训练出好模型、实现技术差异化的关键。</span></p></li><li><p><strong><span>建立严谨的临床验证体系：</span></strong><span> 这是我们技术落地并获得市场认可的生命线。我们应与临床专家和研究机构合作，设计并实施严谨的临床验证方案，用科学数据证明我们AI产品的有效性和安全性。目标是让AI产品能够通过权威部门的认可，拿到进入市场的“通行证”。</span></p></li></ul><h3 id='33-商业模式创新'><span>3.3 商业模式创新：</span></h3><ul><li><p><strong><span>从“卖产品”到“提供价值服务”的转型：</span></strong><span> 逐步转向AI即服务（AIaaS）模式，不再是简单地出售一套软件，而是提供持续的AI能力和支持。</span></p></li><li><p><strong><span>探索基于效果的收费模式：</span></strong><span> 尝试与医院建立更深度的合作，例如根据AI为医院带来的实际效益（如效率提升、成本节约、诊断准确率提高）进行收费，实现与客户的利益共享，真正成为医院的“价值伙伴”。</span></p></li></ul><h3 id='34-生态合作策略'><span>3.4 生态合作策略</span></h3><ul><li><p><strong><span>医院深度合作：</span></strong><span> 医院是我们产品落地的最终用户和最重要的合作伙伴。我们应与标杆医院建立联合创新实验室或深度合作项目，共同定义需求、共同研发产品、共同进行临床验证。通过这种方式，确保我们的产品真正解决医院的痛点，并获得临床的认可和推广。</span></p></li><li><p><strong><span>技术伙伴联盟：</span></strong><span> 除了利用开源大模型，我们也应根据需要，寻找在特定AI技术（如多模态AI、联邦学习等）上有优势的科技公司进行合作，整合最先进的技术能力，共同打造更强大的解决方案。</span></p></li><li><p><strong><span>医药企业协同：</span></strong><span> 医疗大模型的能力可以延伸到整个大健康产业链。我们可以计划与医药企业探索合作，例如利用AI辅助药物研发、优化临床试验患者招募、提供真实世界数据洞察，甚至在患者健康管理和用药依从性方面提供支持，共同拓展新的应用场景和市场空间。</span></p></li></ul><p><span>‍</span></p></div></div>
+</body>
+</html>
