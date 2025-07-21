@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>大模型招投标深度分析报告 v4.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-wordcloud@2.1.0/dist/echarts-wordcloud.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif; background-color: #f9fafc; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 1600px; margin: auto; }
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 2.8rem; font-weight: 600; color: #1a1a1a; }
+        .section-title { font-size: 2.2rem; font-weight: 600; color: #2c3e50; margin: 50px 0 20px 0; text-align: center; border-bottom: 3px solid #007aff; padding-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+        .card { background-color: #fff; border-radius: 16px; padding: 25px; box-shadow: 0 10px 35px rgba(0,0,0,0.07); grid-column: span 12; display: flex; flex-direction: column; }
+        .card-col-4 { grid-column: span 4; }
+        .card-col-6 { grid-column: span 6; }
+        .card-col-8 { grid-column: span 8; }
+        @media (max-width: 1200px) { .card-col-4, .card-col-6, .card-col-8 { grid-column: span 12; } }
+        .card h3 { font-size: 1.5rem; margin-top: 0; margin-bottom: 15px; font-weight: 600; color: #2c3e50; padding-bottom: 10px; border-bottom: 2px solid #f0f0f0; }
+        .chart { width: 100%; height: 420px; flex-grow: 1; }
+        .insight { font-size: 1rem; color: #555; line-height: 1.7; padding: 15px; background-color: #fafbff; border-top: 1px solid #eee; margin-top: 20px; border-radius: 0 0 16px 16px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; text-align: center; margin-bottom: 30px; grid-column: span 12; }
+        .kpi-item { background: #fff; padding: 25px 20px; border-radius: 16px; box-shadow: 0 10px 35px rgba(0,0,0,0.07); }
+        .kpi-item .value { font-size: 2.5rem; font-weight: 700; color: #007aff; }
+        .kpi-item .label { font-size: 1.1rem; color: #6c757d; margin-top: 8px; }
+        #award-overview-kpis .kpi-item { padding: 15px; box-shadow: none; border: 1px solid #eee; }
+        #award-overview-kpis .kpi-item .value { font-size: 2rem; }
+        #award-overview-kpis .kpi-item .label { font-size: 1rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header"><h1>大模型招投标深度分析报告</h1></div>
+    <div class="grid">
+        <div class="kpi-grid">
+            <div class="kpi-item"><div class="value">745</div><div class="label">招标项目总数</div></div>
+            <div class="kpi-item"><div class="value">258</div><div class="label">中标项目总数</div></div>
+            <div class="kpi-item"><div class="value">428,819</div><div class="label">预算总额(万)</div></div>
+            <div class="kpi-item"><div class="value">73,373</div><div class="label">中标总额(万)</div></div>
+            <div class="kpi-item"><div class="value">34.63%</div><div class="label">中标率</div></div>
+            <div class="kpi-item"><div class="value">17.11%</div><div class="label">预算达成率</div></div>
+        </div>
+        <div class="card"><div id="monthly-trends" class="chart"></div><div class="insight"><p><strong>洞察分析：</strong>市场趋势显示，招标与中标活动在特定季度（如Q2、Q4）呈现高峰，可能与机构的预算周期和项目规划有关。中标金额的波动通常伴随着高价值项目的落地。</p></div></div>
+    </div>
+
+    <h2 class="section-title">第一部分：市场需求分析</h2>
+    <div class="grid">
+        <div class="card card-col-6"><h3>采购方式分布</h3><div id="procurement-pie" class="chart"></div><div class="insight"><p><strong>洞察分析：</strong>公开招标是项目数量最多的采购方式，体现了市场的开放性和竞争性。而单一来源采购的平均预算金额最高，说明高投入、高复杂度的战略性项目更倾向于定向委托。</p></div></div>
+        <div class="card card-col-6"><h3>不同采购方式平均预算</h3><div id="procurement-bar" class="chart"></div></div>
+        <div class="card"><h3>招标项目地域分布</h3><div id="geo-map" class="chart"></div><div class="insight"><p><strong>洞察分析：</strong>市场需求在地理上呈现高度集中的态势，以<strong>四川</strong>为首的东部沿海和经济发达省份是需求核心区，反映了区域经济水平与大模型应用需求的强正相关性。</p></div></div>
+    </div>
+
+    <h2 class="section-title">第二部分：中标结果分析</h2>
+    <div class="grid">
+        <div class="card card-col-4"><h3>中标情况概览</h3><div id="award-overview-kpis" class="kpi-grid"></div><div class="insight"><p><strong>洞察分析：</strong>中标项目金额分布广泛，从<strong>0.01万</strong>到<strong>4811.93万</strong>不等。平均中标金额为<strong>270.68万</strong>，而中位数为<strong>96.80万</strong>，后者更能反映市场的一般项目规模，说明市场中存在较多金额较小但数量众多的项目。</p></div></div>
+        <div class="card card-col-8"><h3>中标金额分布</h3><div id="award-boxplot" class="chart"></div></div>
+        <div class="card card-col-6"><h3>Top 10 中标厂商 (按金额)</h3><div id="vendor-pie" class="chart"></div><div class="insight"><p><strong>洞察分析：</strong>市场集中度明显，按金额计算，以<strong>讯飞医疗科技股份有限公司</strong>为首的Top 3厂商占据了市场主导地位。而在项目数量上，<strong>杭州全诊医学科技有限公司</strong>则展现了其强大的市场覆盖能力。</p><p style='font-size:0.8em; color:#888;'>*注：已剔除“未标明”及空白的中标单位。*</p></div></div>
+        <div class="card card-col-6"><h3>Top 10 中标厂商 (按项目数)</h3><div id="vendor-bar" class="chart"></div></div>
+        <div class="card"><h3>厂商综合实力矩阵</h3><div id="vendor-bubble" class="chart"></div><div class="insight"><p><strong>洞察分析：</strong>综合实力矩阵清晰地将厂商分为四类：位于右上方的<strong>市场领导者</strong>（项目多、金额高），左上方的<strong>利基专家</strong>（项目少、金额高），右下方的<strong>市场渗透者</strong>（项目多、金额低），以及左下方的<strong>新兴参与者</strong>。</p><p style='font-size:0.8em; color:#888;'>*图例：气泡大小代表平均中标单价。*</p></div></div>
+        <div class="card card-col-6"><h3>中标项目地域分布</h3><div id="award-geo-map" class="chart"></div><div class="insight"><p><strong>洞察分析：</strong>中标项目同样在地理上高度集中，<strong>江苏</strong>的中标项目数量遥遥领先，这表明该地区的市场不仅需求旺盛，项目落地和成交也最为活跃，是厂商竞争的核心战场。</p></div></div>
+        <div class="card card-col-6"><h3>应用场景分析</h3><div id="wordcloud" class="chart"></div><div class="insight"><p><strong>洞察分析：</strong>应用场景分析表明，<strong>“其他应用”</strong>是当前最核心的需求领域。同时，“算力/基础设施”和“数据服务/治理”作为底层支撑，也占据了重要地位，这反映了市场从基础建设到上层应用全面发展的趋势。</p></div></div>
+    </div>
+</div>
+
+<script>
+    const colorPalette = ['#5470C6', '#91CC75', '#FAC858', '#EE6666', '#73C0DE', '#3BA272', '#FC8452', '#9A60B4', '#EA7CCC'];
+    
+    // Monthly Trends
+    echarts.init(document.getElementById('monthly-trends')).setOption({
+        tooltip: { trigger: 'axis' },
+        legend: { data: ['招标项目数', '中标项目数', '预算总额(万元)', '中标总额(万元)'] },
+        xAxis: { type: 'category', data: ["2024-12", "2025-01", "2025-02", "2025-03", "2025-04", "2025-05", "2025-06", "2025-07", "NaT"] },
+        yAxis: [{ type: 'value', name: '项目数' }, { type: 'value', name: '金额 (万元)' }],
+        series: [
+            { name: '招标项目数', type: 'bar', data: [5, 27, 32, 125, 147, 121, 173, 115, 1] },
+            { name: '中标项目数', type: 'bar', data: [1, 30, 17, 18, 35, 52, 56, 26, 0], itemStyle:{color:'#91CC75'} },
+            { name: '预算总额(万元)', type: 'line', yAxisIndex: 1, data: [1091.1, 5626.73, 5335.5599999999995, 21506.34, 107172.04000000001, 69970.2, 68395.84, 149720.84, 428818.65000000014], itemStyle:{color:'#FAC858'} },
+            { name: '中标总额(万元)', type: 'line', yAxisIndex: 1, data: [194.0, 5438.349999999999, 6408.25, 1401.17, 11340.45, 14419.55, 18225.88, 6182.76, 0.0], itemStyle:{color:'#EE6666'} }
+        ]
+    });
+
+    // Procurement Pie
+    echarts.init(document.getElementById('procurement-pie')).setOption({
+        tooltip: { trigger: 'item', formatter: '{b} <br/>项目数: {c} ({d}%)' },
+        legend: { top: 'bottom', left: 'center' },
+        series: [{ name: '采购方式', type: 'pie', radius: ['45%', '70%'], center: ['50%', '45%'], data: [{"name": "\u516c\u5f00\u62db\u6807", "value": 280}, {"name": "\u672a\u6807\u660e", "value": 261}, {"name": "\u7ade\u4e89\u6027\u78cb\u5546", "value": 73}, {"name": "\u8be2\u4ef7", "value": 35}, {"name": "\u7ade\u4ef7", "value": 35}, {"name": "\u6bd4\u9009", "value": 23}, {"name": "\u7ade\u4e89\u6027\u8c08\u5224", "value": 14}, {"name": "\u5355\u4e00\u6765\u6e90", "value": 8}, {"name": "\u516c\u5f00\u8be2\u4ef7", "value": 5}, {"name": "\u9074\u9009\u516c\u544a", "value": 4}, {"name": "\u8be2\u6bd4", "value": 3}, {"name": "\u9080\u8bf7\u62db\u6807", "value": 2}, {"name": "\u7f51\u4e0a\u8be2\u4ef7", "value": 1}, {"name": "\u53cd\u5411\u7ade\u4ef7", "value": 1}] }]
+    });
+
+    // Procurement Bar
+    echarts.init(document.getElementById('procurement-bar')).setOption({
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        xAxis: { type: 'category', data: ["\u5355\u4e00\u6765\u6e90", "\u672a\u6807\u660e", "\u516c\u5f00\u62db\u6807", "\u7ade\u4e89\u6027\u8c08\u5224", "\u7ade\u4e89\u6027\u78cb\u5546", "\u8be2\u4ef7", "\u6bd4\u9009", "\u7f51\u4e0a\u8be2\u4ef7", "\u9074\u9009\u516c\u544a", "\u9080\u8bf7\u62db\u6807", "\u8be2\u6bd4", "\u7ade\u4ef7", "\u53cd\u5411\u7ade\u4ef7", "\u516c\u5f00\u8be2\u4ef7"], axisLabel: { interval: 0, rotate: 30 } },
+        yAxis: { type: 'value', name: '万元' },
+        grid: { top: '15%', right: '5%', bottom: '20%', left: '15%' },
+        series: [{ name: '平均预算', type: 'bar', data: [1778.65, 1330.17, 941.16, 130.87, 128.83, 49.63, 48.81, 36.0, 20.17, 20.0, 17.65, 14.88, 0.6, NaN], color: '#73C0DE' }]
+    });
+
+    // Geo Map
+    echarts.init(document.getElementById('geo-map')).setOption({
+        tooltip: { trigger: 'item', formatter: '{b}<br/>项目数: {c}' },
+        visualMap: { min: 0, max: 107, left: 'left', top: 'bottom', text: ['高', '低'], calculable: true, inRange: { color: ['#D6E4FF', '#5470C6'] } },
+        series: [{ name: '项目数', type: 'map', map: 'china', roam: true, data: [{"name": "\u56db\u5ddd", "value": 107}, {"name": "\u5e7f\u4e1c", "value": 106}, {"name": "\u6d59\u6c5f", "value": 83}, {"name": "\u65b0\u7586", "value": 44}, {"name": "\u6c5f\u82cf", "value": 42}, {"name": "\u798f\u5efa", "value": 37}, {"name": "\u6e56\u5357", "value": 33}, {"name": "\u5317\u4eac", "value": 29}, {"name": "\u5e7f\u897f", "value": 25}, {"name": "\u4e91\u5357", "value": 23}, {"name": "\u91cd\u5e86", "value": 22}, {"name": "\u6c5f\u897f", "value": 21}, {"name": "\u5c71\u4e1c", "value": 19}, {"name": "\u8d35\u5dde", "value": 18}, {"name": "\u5409\u6797", "value": 17}, {"name": "\u6cb3\u5357", "value": 16}, {"name": "\u4e0a\u6d77", "value": 15}, {"name": "\u6cb3\u5317", "value": 14}, {"name": "\u5b89\u5fbd", "value": 13}, {"name": "\u5b81\u590f", "value": 10}, {"name": "\u5185\u8499\u53e4", "value": 8}, {"name": "\u7518\u8083", "value": 8}, {"name": "\u9ed1\u9f99\u6c5f", "value": 7}, {"name": "\u9655\u897f", "value": 6}, {"name": "\u6e56\u5317", "value": 6}, {"name": "\u5929\u6d25", "value": 5}, {"name": "\u5c71\u897f", "value": 4}, {"name": "\u8fbd\u5b81", "value": 3}, {"name": "\u9752\u6d77", "value": 2}] }]
+    });
+
+    // Award Overview KPIs
+    document.getElementById('award-overview-kpis').innerHTML = `
+        <div class="kpi-item"><div class="value">235</div><div class="label">中标项目数</div></div>
+        <div class="kpi-item"><div class="value">4811.93</div><div class="label">最大金额(万)</div></div>
+        <div class="kpi-item"><div class="value">0.01</div><div class="label">最小金额(万)</div></div>
+        <div class="kpi-item"><div class="value">270.68</div><div class="label">平均金额(万)</div></div>
+        <div class="kpi-item"><div class="value">96.80</div><div class="label">金额中位数(万)</div></div>
+    `;
+
+    // Award Boxplot
+    echarts.init(document.getElementById('award-boxplot')).setOption({
+        tooltip: { trigger: 'item', axisPointer: { type: 'shadow' } },
+        yAxis: { type: 'category', data: ['金额(万元)'], show: false },
+        xAxis: { type: 'value', name: '金额 (万元)', scale: true },
+        grid: { top: '10%', right: '10%', bottom: '10%', left: '10%' },
+        series: [{ name: '中标金额', type: 'boxplot', data: [[0.01, 41.955, 96.8, 246.0, 4811.93]] }]
+    });
+
+    // Vendor Pie
+    echarts.init(document.getElementById('vendor-pie')).setOption({
+        tooltip: { trigger: 'item', formatter: '{b} <br/>金额: {c.toFixed(0)} 万 ({d}%)' },
+        legend: { top: 'bottom', left: 'center' },
+        series: [{ name: '市场份额', type: 'pie', radius: '70%', center: ['50%', '45%'], data: [{"name": "\u8baf\u98de\u533b\u7597\u79d1\u6280\u80a1\u4efd\u6709\u9650\u516c\u53f8", "value": 5261.9400000000005}, {"name": "\u676d\u5dde\u5168\u8bca\u533b\u5b66\u79d1\u6280\u6709\u9650\u516c\u53f8", "value": 4132.2}, {"name": "\u4e2d\u56fd\u79fb\u52a8\u901a\u4fe1\u96c6\u56e2\u6d59\u6c5f\u6709\u9650\u516c\u53f8\u5b81\u6ce2\u5206\u516c\u53f8", "value": 4080.0}, {"name": "\u7d2b\u5149\u8f6f\u4ef6\u7cfb\u7edf\u6709\u9650\u516c\u53f8", "value": 3772.0}, {"name": "\u536b\u5b81\u5065\u5eb7\u79d1\u6280\u96c6\u56e2\u80a1\u4efd\u6709\u9650\u516c\u53f8", "value": 3742.0}, {"name": "\u4e1c\u534e\u533b\u4e3a\u79d1\u6280\u6709\u9650\u516c\u53f8", "value": 3027.38}, {"name": "\u4e2d\u7535\u9e3f\u4fe1\u4fe1\u606f\u79d1\u6280\u6709\u9650\u516c\u53f8", "value": 2600.0}, {"name": "\u56db\u5ddd\u4e2d\u79fb\u901a\u4fe1\u6280\u672f\u5de5\u7a0b\u6709\u9650\u516c\u53f8", "value": 2140.0}, {"name": "\u56fd\u836f\u96c6\u56e2\u5317\u4eac\u533b\u7597\u5668\u68b0\u6709\u9650\u516c\u53f8", "value": 1820.0}, {"name": "\u6167\u4fe1\u79d1\u6280\uff08\u5929\u6d25\uff09\u6709\u9650\u516c\u53f8", "value": 1596.0}] }]
+    });
+
+    // Vendor Bar
+    echarts.init(document.getElementById('vendor-bar')).setOption({
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        grid: { left: '5%', right: '5%', bottom: '3%', containLabel: true },
+        xAxis: { type: 'value' },
+        yAxis: { type: 'category', data: ["\u8baf\u98de\u533b\u7597\u79d1\u6280\u80a1\u4efd\u6709\u9650\u516c\u53f8", "\u884c\u4e30\u94f6\u62d3\u79d1\u6280\u96c6\u56e2\u6709\u9650\u516c\u53f8", "\u4e2d\u56fd\u7535\u4fe1\u80a1\u4efd\u6709\u9650\u516c\u53f8\u5b81\u8fdc\u5206\u516c\u53f8", "\u8bed\u5764\uff08\u5317\u4eac\uff09\u7f51\u7edc\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u4e0a\u6d77\u667a\u6167\u77e5\u5230\u7f51\u7edc\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u6c5f\u82cf\u79fb\u52a8\u4fe1\u606f\u7cfb\u7edf\u96c6\u6210\u6709\u9650\u516c\u53f8", "\u5317\u4eac\u4e2d\u79d1\u6052\u4e1a\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u5317\u4eac\u60e0\u6bcf\u4e91\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u4e2d\u56fd\u7535\u4fe1\u80a1\u4efd\u6709\u9650\u516c\u53f8\u6cf8\u5dde\u5206\u516c\u53f8", "\u676d\u5dde\u5168\u8bca\u533b\u5b66\u79d1\u6280\u6709\u9650\u516c\u53f8"] },
+        series: [{ name: '项目数', type: 'bar', data: [4, 4, 4, 4, 4, 4, 4, 5, 6, 10], color: '#FAC858' }]
+    });
+
+    // Vendor Bubble
+    echarts.init(document.getElementById('vendor-bubble')).setOption({
+        tooltip: { trigger: 'item', formatter: params => `${params.data[3]}<br/>项目数: ${params.data[0]}<br/>总金额: ${params.data[1].toFixed(0)} 万<br/>平均单价: ${params.data[2].toFixed(0)} 万` },
+        xAxis: { name: '项目数', type: 'value', splitLine: { lineStyle: { type: 'dashed' } } },
+        yAxis: { name: '总金额 (万元)', type: 'value', splitLine: { lineStyle: { type: 'dashed' } } },
+        legend: { data: ["\u8baf\u98de\u533b\u7597\u79d1\u6280\u80a1\u4efd\u6709\u9650\u516c\u53f8", "\u676d\u5dde\u5168\u8bca\u533b\u5b66\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u4e2d\u56fd\u79fb\u52a8\u901a\u4fe1\u96c6\u56e2\u6d59\u6c5f\u6709\u9650\u516c\u53f8\u5b81\u6ce2\u5206\u516c\u53f8", "\u7d2b\u5149\u8f6f\u4ef6\u7cfb\u7edf\u6709\u9650\u516c\u53f8", "\u536b\u5b81\u5065\u5eb7\u79d1\u6280\u96c6\u56e2\u80a1\u4efd\u6709\u9650\u516c\u53f8", "\u4e1c\u534e\u533b\u4e3a\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u4e2d\u7535\u9e3f\u4fe1\u4fe1\u606f\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u56db\u5ddd\u4e2d\u79fb\u901a\u4fe1\u6280\u672f\u5de5\u7a0b\u6709\u9650\u516c\u53f8", "\u56fd\u836f\u96c6\u56e2\u5317\u4eac\u533b\u7597\u5668\u68b0\u6709\u9650\u516c\u53f8", "\u6167\u4fe1\u79d1\u6280\uff08\u5929\u6d25\uff09\u6709\u9650\u516c\u53f8", "\u817e\u8baf\u4e91\u8ba1\u7b97\uff08\u5317\u4eac\uff09\u6709\u9650\u8d23\u4efb\u516c\u53f8", "\u56fd\u836f\u96c6\u56e2\u5c71\u897f\u6709\u9650\u516c\u53f8", "\u65b0\u7586\u4eba\u4eba\u548c\u4f17\u4fe1\u606f\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u4e2d\u56fd\u79fb\u52a8\u901a\u4fe1\u96c6\u56e2\u4e91\u5357\u6709\u9650\u516c\u53f8\u695a\u96c4\u5206\u516c\u53f8", "\u5317\u4eac\u60e0\u6bcf\u4e91\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u8054\u901a\u6570\u5b57\u79d1\u6280\u6709\u9650\u516c\u53f8", "\u8054\u901a\u6570\u5b57\u79d1\u6280\u6709\u9650\u516c\u53f8\u9ed1\u9f99\u6c5f\u7701\u5206\u516c\u53f8", "\u4e91\u5357\u4e45\u8fdc\u94f6\u6d77\u8f6f\u4ef6\u6709\u9650\u516c\u53f8", "\u8054\u901a\uff08\u6c5f\u82cf\uff09\u4ea7\u4e1a\u4e92\u8054\u7f51\u6709\u9650\u516c\u53f8", "\u6d59\u6c5f\u8c28\u4e91\u79d1\u6280\u6709\u9650\u516c\u53f8"], bottom: 0, type: 'scroll' },
+        series: [{ name: '厂商', type: 'scatter', data: [[4, 5261.9400000000005, 1315.4850000000001, "\u8baf\u98de\u533b\u7597\u79d1\u6280\u80a1\u4efd\u6709\u9650\u516c\u53f8"], [10, 4132.2, 413.21999999999997, "\u676d\u5dde\u5168\u8bca\u533b\u5b66\u79d1\u6280\u6709\u9650\u516c\u53f8"], [3, 4080.0, 1360.0, "\u4e2d\u56fd\u79fb\u52a8\u901a\u4fe1\u96c6\u56e2\u6d59\u6c5f\u6709\u9650\u516c\u53f8\u5b81\u6ce2\u5206\u516c\u53f8"], [2, 3772.0, 1886.0, "\u7d2b\u5149\u8f6f\u4ef6\u7cfb\u7edf\u6709\u9650\u516c\u53f8"], [2, 3742.0, 1871.0, "\u536b\u5b81\u5065\u5eb7\u79d1\u6280\u96c6\u56e2\u80a1\u4efd\u6709\u9650\u516c\u53f8"], [2, 3027.38, 1513.69, "\u4e1c\u534e\u533b\u4e3a\u79d1\u6280\u6709\u9650\u516c\u53f8"], [2, 2600.0, 1300.0, "\u4e2d\u7535\u9e3f\u4fe1\u4fe1\u606f\u79d1\u6280\u6709\u9650\u516c\u53f8"], [1, 2140.0, 2140.0, "\u56db\u5ddd\u4e2d\u79fb\u901a\u4fe1\u6280\u672f\u5de5\u7a0b\u6709\u9650\u516c\u53f8"], [1, 1820.0, 1820.0, "\u56fd\u836f\u96c6\u56e2\u5317\u4eac\u533b\u7597\u5668\u68b0\u6709\u9650\u516c\u53f8"], [2, 1596.0, 798.0, "\u6167\u4fe1\u79d1\u6280\uff08\u5929\u6d25\uff09\u6709\u9650\u516c\u53f8"], [1, 1479.97, 1479.97, "\u817e\u8baf\u4e91\u8ba1\u7b97\uff08\u5317\u4eac\uff09\u6709\u9650\u8d23\u4efb\u516c\u53f8"], [1, 1158.0, 1158.0, "\u56fd\u836f\u96c6\u56e2\u5c71\u897f\u6709\u9650\u516c\u53f8"], [2, 1136.04, 568.02, "\u65b0\u7586\u4eba\u4eba\u548c\u4f17\u4fe1\u606f\u79d1\u6280\u6709\u9650\u516c\u53f8"], [1, 1134.87, 1134.87, "\u4e2d\u56fd\u79fb\u52a8\u901a\u4fe1\u96c6\u56e2\u4e91\u5357\u6709\u9650\u516c\u53f8\u695a\u96c4\u5206\u516c\u53f8"], [5, 1021.0, 204.2, "\u5317\u4eac\u60e0\u6bcf\u4e91\u79d1\u6280\u6709\u9650\u516c\u53f8"], [1, 1018.0, 1018.0, "\u8054\u901a\u6570\u5b57\u79d1\u6280\u6709\u9650\u516c\u53f8"], [1, 982.0, 982.0, "\u8054\u901a\u6570\u5b57\u79d1\u6280\u6709\u9650\u516c\u53f8\u9ed1\u9f99\u6c5f\u7701\u5206\u516c\u53f8"], [2, 959.72, 479.86, "\u4e91\u5357\u4e45\u8fdc\u94f6\u6d77\u8f6f\u4ef6\u6709\u9650\u516c\u53f8"], [2, 779.9399999999999, 389.96999999999997, "\u8054\u901a\uff08\u6c5f\u82cf\uff09\u4ea7\u4e1a\u4e92\u8054\u7f51\u6709\u9650\u516c\u53f8"], [3, 738.0, 246.0, "\u6d59\u6c5f\u8c28\u4e91\u79d1\u6280\u6709\u9650\u516c\u53f8"]], symbolSize: data => Math.sqrt(data[2]) * 2 + 10, itemStyle: { color: (params) => colorPalette[params.dataIndex % colorPalette.length] } }]
+    });
+
+    // Award Geo Map
+    echarts.init(document.getElementById('award-geo-map')).setOption({
+        tooltip: { trigger: 'item', formatter: '{b}<br/>中标项目数: {c}' },
+        visualMap: { min: 0, max: 33, left: 'left', top: 'bottom', text: ['高', '低'], calculable: true, inRange: { color: ['#D6FFD6', '#3BA272'] } },
+        series: [{ name: '中标项目数', type: 'map', map: 'china', roam: true, data: [{"name": "\u6c5f\u82cf", "value": 33}, {"name": "\u5e7f\u4e1c", "value": 24}, {"name": "\u6d59\u6c5f", "value": 21}, {"name": "\u56db\u5ddd", "value": 17}, {"name": "\u5317\u4eac", "value": 16}, {"name": "\u6cb3\u5317", "value": 16}, {"name": "\u6e56\u5357", "value": 11}, {"name": "\u4e91\u5357", "value": 10}, {"name": "\u5c71\u4e1c", "value": 9}, {"name": "\u798f\u5efa", "value": 9}, {"name": "\u9655\u897f", "value": 7}, {"name": "\u5929\u6d25", "value": 6}, {"name": "\u65b0\u7586", "value": 6}, {"name": "\u9ed1\u9f99\u6c5f", "value": 6}, {"name": "\u6e56\u5317", "value": 5}, {"name": "\u5e7f\u897f", "value": 5}, {"name": "\u6cb3\u5357", "value": 5}, {"name": "\u5c71\u897f", "value": 5}, {"name": "\u4e0a\u6d77", "value": 4}, {"name": "\u5b81\u590f", "value": 4}, {"name": "\u5b89\u5fbd", "value": 3}, {"name": "\u8fbd\u5b81", "value": 3}, {"name": "\u6c5f\u897f", "value": 3}, {"name": "\u5409\u6797", "value": 2}, {"name": "\u8d35\u5dde", "value": 2}, {"name": "\u91cd\u5e86", "value": 1}, {"name": "\u5185\u8499\u53e4", "value": 1}, {"name": "\u7518\u8083", "value": 1}] }]
+    });
+
+    // Word Cloud
+    echarts.init(document.getElementById('wordcloud')).setOption({
+        series: [{ type: 'wordCloud', shape: 'pentagon', sizeRange: [14, 70], rotationRange: [-45, 45], gridSize: 8, layoutAnimation: true, data: [{"name": "\u5176\u4ed6\u5e94\u7528", "value": 124}, {"name": "\u6a21\u578b\u8bad\u7ec3/\u5f00\u53d1", "value": 55}, {"name": "\u7b97\u529b/\u57fa\u7840\u8bbe\u65bd", "value": 28}, {"name": "\u4e34\u5e8a\u8f85\u52a9/CDSS", "value": 24}, {"name": "\u6559\u5b66/\u79d1\u7814", "value": 13}, {"name": "\u667a\u6167\u670d\u52a1", "value": 7}, {"name": "\u667a\u6167\u7ba1\u7406/\u8fd0\u8425", "value": 5}, {"name": "\u6570\u636e\u670d\u52a1/\u6cbb\u7406", "value": 4}] }]
+    });
+
+</script>
+</body>
+</html>
