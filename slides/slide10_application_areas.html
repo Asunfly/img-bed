@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1280, initial-scale=1.0">
+    <title>产品应用领域：智慧医疗三大核心场景</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 1280px;
+            height: 720px;
+            background-color: #0A192F;
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            color: #E0E0E0;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 30px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .main-title {
+            font-size: 32px;
+            font-weight: 500;
+            color: #FFFFFF;
+            margin-bottom: 25px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .content-grid {
+            width: 100%;
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: 380px 1fr 340px;
+            grid-template-rows: 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .panel {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            height: 100%;
+        }
+        
+        .left-panel {
+            justify-content: space-between;
+        }
+        
+        .right-panel {
+             justify-content: space-around;
+        }
+
+        .card {
+            background-color: rgba(23, 49, 77, 0.6);
+            border: 1px solid #17314d;
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 500;
+            color: #FFFFFF;
+        }
+
+        .card-title svg {
+            margin-right: 10px;
+        }
+        
+        .card-tag {
+            font-size: 14px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 15px;
+            color: #fff;
+        }
+        
+        .tag-blue { background-color: #3b82f6; }
+        .tag-green { background-color: #10b981; }
+        .tag-purple { background-color: #8b5cf6; }
+
+        .card-content ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0 0 10px 0;
+        }
+
+        .card-content li {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #B0C4DE;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .card-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #4A90E2;
+            font-size: 16px;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            font-size: 13px;
+            color: #8892B0;
+            border-top: 1px solid #17314d;
+            padding-top: 8px;
+        }
+        
+        .card-footer strong {
+            color: #A8B2D1;
+        }
+
+        .center-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .center-panel img {
+            max-width: 100%;
+            max-height: 450px;
+            object-fit: contain;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .ranking-card .card-content, .trends-card .card-content {
+            padding: 0;
+        }
+
+        .ranking-list, .trends-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .ranking-item, .trend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .trend-item {
+            margin-bottom: 14px;
+        }
+
+        .ranking-num {
+            font-weight: 700;
+            color: #4A90E2;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+            margin-right: 8px;
+        }
+        
+        .ranking-text {
+            flex-grow: 1;
+            color: #B0C4DE;
+        }
+        .ranking-count {
+            font-weight: 500;
+            color: #E0E0E0;
+        }
+
+        .trend-icon {
+            margin-right: 12px;
+            color: #10b981;
+        }
+        
+        .trend-text {
+             color: #B0C4DE;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <h1 class="main-title">产品应用领域：智慧医疗三大核心场景</h1>
+        <div class="content-grid">
+            <div class="panel left-panel">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 21H5C3.89543 21 3 20.1046 3 19V8.82843C3 8.29799 3.21071 7.78929 3.58579 7.41421L9.58579 1.41421C9.96086 1.03914 10.4696 0.828427 11 0.828427H19C20.1046 0.828427 21 1.72386 21 2.82843V19C21 20.1046 20.1046 21 19 21Z" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 8H7" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 12H7" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 16H7" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 10.5V13.5M14.5 12H17.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            智慧临床
+                        </h3>
+                        <span class="card-tag tag-blue">53%</span>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>临床决策支持 (CDSS)</li>
+                            <li>病历与质控系统</li>
+                            <li>医学影像辅助诊断</li>
+                            <li>智能问诊与导诊</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <strong>价值：</strong>直接提升诊疗准确性和效率
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 17L12 22L22 17" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 12L12 17L22 12" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            智慧教学
+                        </h3>
+                        <span class="card-tag tag-green">~13%</span>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>医学教育与培训</li>
+                            <li>虚拟病例与模拟实训</li>
+                            <li>医学继续教育</li>
+                            <li>健康科普与咨询</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <strong>价值：</strong>加速医学人才培养和知识传递
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.0708 4.92944C15.1656 1.0242 8.83402 1.0242 4.92877 4.92944C1.02353 8.83469 1.02353 15.1663 4.92877 19.0716C8.83402 22.9768 15.1656 22.9768 19.0708 19.0716C22.9761 15.1663 22.9761 8.83469 19.0708 4.92944Z" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 12.5C13.3807 12.5 14.5 11.3807 14.5 10C14.5 8.61929 13.3807 7.5 12 7.5C10.6193 7.5 9.5 8.61929 9.5 10C9.5 11.3807 10.6193 12.5 12 12.5Z" stroke="#8b5cf6" stroke-width="2"/><path d="M10 16C10.5 17 11.5 17.5 12 17.5C12.5 17.5 13.5 17 14 16" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round"/></svg>
+                            智慧科研
+                        </h3>
+                        <span class="card-tag tag-purple">~55项</span>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li>医学数据智能平台</li>
+                            <li>真实世界研究 (RWE)</li>
+                            <li>药物研发与分子设计</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <strong>价值：</strong>加速医学创新和新药研发
+                    </div>
+                </div>
+            </div>
+            <div class="center-panel">
+                <img src="images/app_areas.png" alt="应用领域分布图">
+            </div>
+            <div class="panel right-panel">
+                <div class="card ranking-card">
+                    <div class="card-header">
+                        <h3 class="card-title">应用场景热点排行</h3>
+                    </div>
+                    <div class="card-content">
+                       <ul class="ranking-list">
+                           <li class="ranking-item">
+                               <span class="ranking-num">1</span>
+                               <span class="ranking-text">其他应用</span>
+                               <span class="ranking-count">124个项目</span>
+                           </li>
+                           <li class="ranking-item">
+                               <span class="ranking-num">2</span>
+                               <span class="ranking-text">模型训练/开发</span>
+                               <span class="ranking-count">55个项目</span>
+                           </li>
+                           <li class="ranking-item">
+                               <span class="ranking-num">3</span>
+                               <span class="ranking-text">算力/基础设施</span>
+                               <span class="ranking-count">28个项目</span>
+                           </li>
+                           <li class="ranking-item">
+                               <span class="ranking-num">4</span>
+                               <span class="ranking-text">临床辅助/CDSS</span>
+                               <span class="ranking-count">24个项目</span>
+                           </li>
+                           <li class="ranking-item">
+                               <span class="ranking-num">5</span>
+                               <span class="ranking-text">教学/科研</span>
+                               <span class="ranking-count">13个项目</span>
+                           </li>
+                       </ul>
+                    </div>
+                </div>
+                <div class="card trends-card">
+                    <div class="card-header">
+                        <h3 class="card-title">发展趋势洞察</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul class="trends-list">
+                            <li class="trend-item">
+                                <span class="trend-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12L3 19C3 19.5304 3.21071 20.0391 3.58579 20.4142C3.96086 20.7893 4.46957 21 5 21L19 21C19.5304 21 20.0391 20.7893 20.4142 20.4142C20.7893 20.0391 21 19.5304 21 19L21 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8L12 3L8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <span class="trend-text"><strong>从基础到应用：</strong>算力、数据治理等底层支撑</span>
+                            </li>
+                             <li class="trend-item">
+                                <span class="trend-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 12H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 6H3.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12H3.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 18H3.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <span class="trend-text"><strong>全流程覆盖：</strong>诊前、诊中、诊后全链条应用</span>
+                            </li>
+                             <li class="trend-item">
+                                <span class="trend-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.21 15.89A10 10 0 118 2.83" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 12A10 10 0 0012 2v10z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <span class="trend-text"><strong>多模态融合：</strong>文本、影像、基因等多维数据</span>
+                            </li>
+                             <li class="trend-item">
+                                <span class="trend-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <span class="trend-text"><strong>个性化服务：</strong>精准医疗与个体化治疗方案</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

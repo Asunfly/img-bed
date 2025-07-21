@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280, height=720">
+  <title>政策驱动分析页面</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    :root {
+      --bg-color: #0F172A;
+      --text-primary: #E2E8F0;
+      --text-secondary: #94A3B8;
+      --accent-color: #38BDF8;
+      --card-bg-1: rgba(56, 189, 248, 0.1);
+      --card-border-1: #38BDF8;
+      --card-bg-2: rgba(74, 222, 128, 0.1);
+      --card-border-2: #4ADF80;
+      --card-bg-3: rgba(167, 139, 250, 0.1);
+      --card-border-3: #A78BFA;
+      --highlight-color: #FACC15;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+      font-family: 'Noto Sans SC', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    }
+
+    .ppt-slide {
+      width: 1280px;
+      height: 720px;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      display: flex;
+      flex-direction: column;
+      padding: 40px 60px;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .slide-title {
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 30px;
+      text-align: center;
+      animation: slideInDown 0.8s ease-out;
+    }
+
+    @keyframes slideInDown {
+        from { transform: translateY(-30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .main-content {
+      display: flex;
+      flex-grow: 1;
+      gap: 40px;
+    }
+
+    .left-panel {
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      animation: slideInLeft 1s ease-out;
+    }
+    
+    @keyframes slideInLeft {
+        from { transform: translateX(-50px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    .right-panel {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: slideInRight 1s ease-out;
+    }
+
+    @keyframes slideInRight {
+        from { transform: translateX(50px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    .data-highlight {
+      background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .data-highlight .number {
+      font-size: 100px;
+      font-weight: 700;
+      color: var(--highlight-color);
+      line-height: 1;
+    }
+
+    .data-highlight .label {
+      font-size: 20px;
+      color: var(--text-secondary);
+      margin-top: 5px;
+    }
+
+    .timeline-container {
+      flex-grow: 1;
+      position: relative;
+      padding-left: 30px;
+    }
+
+    .timeline-line {
+      position: absolute;
+      left: 0;
+      top: 15px;
+      bottom: 15px;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--accent-color), var(--card-border-2), var(--card-border-3));
+      border-radius: 2px;
+    }
+    
+    .timeline-dot {
+        position: absolute;
+        left: -8px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background-color: var(--bg-color);
+        border: 3px solid;
+    }
+
+    .timeline-dot.start { top: 5px; border-color: var(--accent-color); }
+    .timeline-dot.end { bottom: 5px; border-color: var(--card-border-3); }
+
+    .timeline-label {
+        position: absolute;
+        left: 25px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .timeline-label.start { top: 5px; color: var(--accent-color); }
+    .timeline-label.end { bottom: 5px; color: var(--card-border-3); }
+
+    .timeline-content {
+        padding-top: 50px;
+    }
+    .timeline-content h3 {
+        font-size: 18px;
+        color: var(--text-primary);
+        margin: 0 0 10px 0;
+        font-weight: 500;
+    }
+     .timeline-content ul {
+        margin: 0;
+        padding-left: 20px;
+        list-style-type: '— ';
+     }
+     .timeline-content li {
+        color: var(--text-secondary);
+        font-size: 15px;
+        margin-bottom: 8px;
+     }
+
+    .policy-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      flex-grow: 1;
+    }
+    
+    .policy-card {
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .policy-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    .card-1 { background-color: var(--card-bg-1); border-color: var(--card-border-1); }
+    .card-2 { background-color: var(--card-bg-2); border-color: var(--card-border-2); }
+    .card-3 { background-color: var(--card-bg-3); border-color: var(--card-border-3); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+    
+    .card-icon {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+    
+    .card-1 .card-icon { color: var(--card-border-1); }
+    .card-2 .card-icon { color: var(--card-border-2); }
+    .card-3 .card-icon { color: var(--card-border-3); }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .card-content ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style-type: '• ';
+    }
+    
+    .card-content li {
+        font-size: 15px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        padding-left: 5px;
+    }
+    .card-content li:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .insights-container {
+      background-color: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding: 20px 25px;
+      border-top: 2px solid var(--accent-color);
+    }
+
+    .insights-container h3 {
+      font-size: 20px;
+      margin: 0 0 15px 0;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .insights-container h3 svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .insights-container ul {
+      margin: 0;
+      padding-left: 25px;
+      list-style-type: none;
+    }
+    .insights-container li {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .insights-container li::before {
+        content: '✔';
+        color: var(--accent-color);
+        position: absolute;
+        left: -25px;
+        top: 2px;
+    }
+    
+    .insights-container li strong {
+      color: var(--highlight-color);
+      font-weight: 500;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="ppt-slide">
+    <h1 class="slide-title">政策驱动：从"锦上添花"到"必要工具"</h1>
+    <div class="main-content">
+      <div class="left-panel">
+        <div class="data-highlight">
+          <div class="number">14</div>
+          <div class="label">项重要政策文件密集发布</div>
+        </div>
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+          <div class="timeline-dot start"></div>
+          <span class="timeline-label start">2025年1月</span>
+          <div class="timeline-dot end"></div>
+          <span class="timeline-label end">2025年7月</span>
+          <div class="timeline-content">
+              <h3>覆盖领域</h3>
+              <ul>
+                  <li>监管改革</li>
+                  <li>绩效监测</li>
+                  <li>信息化建设</li>
+              </ul>
+          </div>
+        </div>
+      </div>
+      <div class="right-panel">
+        <div class="policy-cards">
+          <div class="policy-card card-1">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+                </svg>
+              </div>
+              <h2 class="card-title">创新驱动</h2>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li>鼓励新药研发、高端医疗器械创新</li>
+                    <li>AI辅助临床试验与药物重定位</li>
+                </ul>
+            </div>
+          </div>
+          <div class="policy-card card-2">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                </svg>
+              </div>
+              <h2 class="card-title">效率提升</h2>
+            </div>
+             <div class="card-content">
+                <ul>
+                    <li>改革监管模式，提升审评审批效率</li>
+                    <li>数字化、智能化监管流程</li>
+                </ul>
+            </div>
+          </div>
+          <div class="policy-card card-3">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" />
+                </svg>
+              </div>
+              <h2 class="card-title">全周期管理</h2>
+            </div>
+             <div class="card-content">
+                <ul>
+                    <li>药品医疗器械全生命周期追溯</li>
+                    <li>强大信息化系统与大数据平台</li>
+                </ul>
+            </div>
+          </div>
+        </div>
+        <div class="insights-container">
+          <h3>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.311a7.5 7.5 0 01-7.5 0c-1.421-.456-2.743-1.332-3.807-2.45M3.75 14.25a7.5 7.5 0 017.5 0c1.421.456 2.743 1.332 3.807 2.45m0 0a12.062 12.062 0 004.5 0m-4.5 2.311a7.5 7.5 0 007.5 0c1.421-.456 2.743-1.332 3.807-2.45m0 0a12.06 12.06 0 00-4.5 0" />
+            </svg>
+            关键洞察
+          </h3>
+          <ul>
+            <li>医疗AI从"锦上添花"转为国家高质量发展的<strong>"必要工具"</strong></li>
+            <li>"国考"驱动医院数字化转型<strong>刚需</strong></li>
+            <li>脑机接口等前沿技术<strong>规范化布局</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

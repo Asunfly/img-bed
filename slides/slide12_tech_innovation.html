@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>技术路径创新</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: #0d1a2e;
+      color: #a8b2d1;
+      font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 35px 50px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .main-title {
+      color: #64ffda;
+      font-size: 32px;
+      text-align: center;
+      margin: 0 0 25px 0;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex-grow: 1;
+    }
+
+    .card {
+      background-color: rgba(30, 58, 95, 0.3);
+      border: 1px solid #1e3a5f;
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .card-header .icon {
+        font-size: 20px;
+        margin-right: 10px;
+        line-height: 1;
+    }
+
+    .card-title {
+      font-size: 19px;
+      color: #e6f1ff;
+      font-weight: 500;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: #8892b0;
+      padding: 5px 10px;
+      background-color: rgba(100, 255, 218, 0.05);
+      border-radius: 4px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    
+    .card h4 {
+      color: #ccd6f6;
+      font-size: 15px;
+      margin: 15px 0 10px 0;
+      font-weight: 500;
+      border-left: 3px solid #64ffda;
+      padding-left: 8px;
+    }
+    
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .card ul li {
+      font-size: 14px;
+      line-height: 1.8;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .card ul li::before {
+      content: '✓';
+      color: #64ffda;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    
+    .tech-stack {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 10px;
+    }
+    .tech-stack li {
+        background-color: rgba(45, 66, 91, 0.6);
+        border-radius: 4px;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        position: relative;
+        padding-left: 20px;
+    }
+    .tech-stack li::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 18px;
+        border-radius: 2px;
+    }
+    .tech-stack li:nth-child(1)::before { background-color: #64ffda; }
+    .tech-stack li:nth-child(2)::before { background-color: #3a86ff; }
+    .tech-stack li:nth-child(3)::before { background-color: #ffbe0b; }
+    .tech-stack .label {
+        font-weight: bold;
+        color: #ccd6f6;
+    }
+
+    .bottom-container {
+      margin-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    
+    .timeline-container {
+        flex: 2;
+    }
+    
+    .investment-container {
+        flex: 1;
+    }
+
+    .section-title {
+        color: #ccd6f6;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 15px;
+        position: relative;
+        padding-left: 15px;
+    }
+    
+    .section-title::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 4px;
+        height: 18px;
+        background-color: #64ffda;
+        border-radius: 2px;
+    }
+
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      padding-top: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 27px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background-color: #1e3a5f;
+      z-index: 0;
+    }
+
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 30%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .timeline-item .date {
+        font-size: 13px;
+        color: #8892b0;
+        margin-bottom: 8px;
+    }
+
+    .timeline-milestone {
+      width: 16px;
+      height: 16px;
+      background-color: #0d1a2e;
+      border: 3px solid #64ffda;
+      border-radius: 50%;
+      margin-bottom: 8px;
+    }
+    
+    .timeline-item h5 {
+        font-size: 15px;
+        color: #e6f1ff;
+        margin: 0 0 5px 0;
+        font-weight: 500;
+    }
+
+    .timeline-item p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #8892b0;
+      margin: 0;
+    }
+    
+    .investment-list li {
+        background-color: rgba(45, 66, 91, 0.6);
+        border-radius: 4px;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        border-left: 3px solid #3a86ff;
+    }
+    
+    .investment-list .label {
+        font-weight: 500;
+        color: #ccd6f6;
+        width: 80px;
+    }
+    .investment-list .value {
+        color: #a8b2d1;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <h1 class="main-title">技术路径创新：构建下一代医疗AI体系</h1>
+
+    <div class="content-grid">
+      <!-- Card 1: 大模型+小模型组合拳 -->
+      <div class="card">
+        <div class="card-header">
+            <span class="icon" style="color:#FFD700;">🤜</span>
+            <h3 class="card-title">大模型+小模型组合拳</h3>
+        </div>
+        <p class="card-subtitle">不重复造轮，智能组合</p>
+        <h4>技术架构:</h4>
+        <ul class="tech-stack">
+          <li><span class="label">应用:</span> 科室/任务专用小模型</li>
+          <li><span class="label">中层:</span> 医疗垂直大模型微调</li>
+          <li><span class="label">基座:</span> 开源大模型 (DeepSeek等)</li>
+        </ul>
+        <h4>优势体现:</h4>
+        <ul>
+          <li>成本降低<span style="color:#64ffda; font-weight:bold;">90%</span>以上</li>
+          <li>部署灵活性大幅提升</li>
+          <li>专业性和通用性兼得</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: 数据治理与标注能力 -->
+      <div class="card">
+        <div class="card-header">
+            <span class="icon">📊</span>
+            <h3 class="card-title">数据治理与标注能力</h3>
+        </div>
+        <p class="card-subtitle">数据质量决定AI效果</p>
+        <h4>技术体系:</h4>
+        <ul>
+          <li><strong>数据收集:</strong> 多源异构数据集成</li>
+          <li><strong>数据清洗:</strong> 智能化数据清洗与标准化</li>
+          <li><strong>数据标注:</strong> 专家知识+机器学习结合</li>
+          <li><strong>质量控制:</strong> 实时数据质量监控体系</li>
+        </ul>
+        <h4>核心竞争力:</h4>
+        <ul>
+          <li>高质量"干净数据"构建壁垒</li>
+        </ul>
+      </div>
+
+      <!-- Card 3: 严谨的临床验证体系 -->
+      <div class="card">
+        <div class="card-header">
+            <span class="icon">🔬</span>
+            <h3 class="card-title">严谨的临床验证体系</h3>
+        </div>
+        <p class="card-subtitle">让AI产品获得"通行证"</p>
+        <h4>验证框架:</h4>
+        <ul>
+          <li><strong>前期验证:</strong> 算法性能测试和仪器验证</li>
+          <li><strong>临床试验:</strong> 多中心、大样本真实世界研究</li>
+          <li><strong>效果评估:</strong> 精准性、安全性、经济性评价</li>
+          <li><strong>权威认证:</strong> 三类医疗器械证等资质获取</li>
+        </ul>
+        <h4>成果输出:</h4>
+        <ul>
+          <li>权威科学证据支撑市场推广</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-container">
+        <div class="timeline-container">
+            <h3 class="section-title">技术路径时间表</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <span class="date">2025 Q3-Q4</span>
+                <div class="timeline-milestone"></div>
+                <h5>技术基础搭建</h5>
+                <p>完成大模型选型部署，建立数据治理标准，启动首批临床验证。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="date">2026 Q1-Q2</span>
+                <div class="timeline-milestone"></div>
+                <h5>垂直能力强化</h5>
+                <p>完成垂直模型微调，开发专用小模型，发布初步验证结果。</p>
+              </div>
+              <div class="timeline-item">
+                <span class="date">2026 Q3-2027</span>
+                <div class="timeline-milestone"></div>
+                <h5>产品化落地</h5>
+                <p>获取医疗器械证书，实现规模化部署，构建创新生态。</p>
+              </div>
+            </div>
+        </div>
+        <div class="investment-container">
+            <h3 class="section-title">技术投入预期</h3>
+            <ul class="investment-list">
+                <li><span class="label">研发投入:</span><span class="value">年营收的 15-20%</span></li>
+                <li><span class="label">人才引进:</span><span class="value">增加AI+医疗复合型人才 50%</span></li>
+                <li><span class="label">企业合作:</span><span class="value">与 5-10 家顶尖医院深度协同</span></li>
+            </ul>
+        </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

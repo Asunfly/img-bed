@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>市场需求量化</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+    
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 1280px;
+      height: 720px;
+      background-color: #0F172A;
+      font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      color: #E2E8F0;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at 100% 0%, rgba(30, 96, 189, 0.25), transparent 50%), #0F172A;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .header h1 {
+      font-size: 36px;
+      font-weight: 500;
+      color: #FFFFFF;
+      margin: 0 0 25px 0;
+      letter-spacing: 1px;
+      opacity: 0;
+      animation: slideInDown 0.8s forwards;
+      animation-delay: 0.2s;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      display: flex;
+      gap: 30px;
+      min-height: 0;
+    }
+
+    .left-column {
+      flex: 1.1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .right-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .card {
+      background-color: rgba(28, 41, 64, 0.5);
+      border: 1px solid rgba(66, 153, 225, 0.15);
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .card .title {
+      font-size: 16px;
+      color: #94A3B8;
+      margin-bottom: 8px;
+    }
+
+    .card .data {
+      font-size: 40px;
+      font-weight: 700;
+      color: #4FD1C5;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .card .data-small {
+      font-size: 34px;
+    }
+
+    .card .period {
+      font-size: 14px;
+      color: #94A3B8;
+      margin-top: auto;
+    }
+    
+    .chart-card {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        min-height: 0;
+    }
+
+    .chart-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    
+    .chart-card .caption {
+       font-size: 15px;
+       color: #94A3B8;
+       text-align: center;
+       margin-top: 10px;
+    }
+    
+    .image-container {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 0;
+        padding: 5px;
+    }
+
+    .analysis-card .analysis-header {
+        margin-bottom: 15px;
+    }
+
+    .analysis-card .analysis-title {
+      font-size: 20px;
+      font-weight: 500;
+      color: #FFFFFF;
+      position: relative;
+      padding-bottom: 8px;
+    }
+    
+    .analysis-card .analysis-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background-color: #4FD1C5;
+      border-radius: 2px;
+    }
+    
+    .analysis-card .analysis-subtitle {
+      font-size: 14px;
+      color: #94A3B8;
+      margin-top: 5px;
+    }
+    
+    .analysis-card .description {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #CBD5E1;
+      margin-top: auto;
+      padding-top: 15px;
+    }
+    
+    .analysis-card .description strong {
+      color: #4FD1C5;
+      font-weight: 500;
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
+    .data-grid .card:nth-child(1) { animation-delay: 0.4s; }
+    .data-grid .card:nth-child(2) { animation-delay: 0.5s; }
+    .data-grid .card:nth-child(3) { animation-delay: 0.6s; }
+    .data-grid .card:nth-child(4) { animation-delay: 0.7s; }
+    .chart-card.table-container { animation-delay: 0.8s; }
+    .right-column .card { animation-delay: 0.9s; }
+
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <div class="header">
+      <h1>市场需求量化：高增长下的蓝海机遇</h1>
+    </div>
+    <div class="main-content">
+      <div class="left-column">
+        <div class="data-grid">
+          <div class="card">
+            <div class="title">中国市场规模</div>
+            <div class="data data-small">82亿 → 260亿</div>
+            <div class="period">2024 - 2027年</div>
+          </div>
+          <div class="card">
+            <div class="title">全球市场规模 (2031年)</div>
+            <div class="data">172<span style="font-size: 22px; color: #94A3B8; margin-left: 4px;">亿</span></div>
+            <div class="period">美元</div>
+          </div>
+          <div class="card">
+            <div class="title">↑ 复合增长率</div>
+            <div class="data">32.6%</div>
+            <div class="period">2023 - 2031年</div>
+          </div>
+          <div class="card">
+            <div class="title">AI医疗占比</div>
+            <div class="data">1/5</div>
+            <div class="period">2025年AI应用市场</div>
+          </div>
+        </div>
+        <div class="card chart-card table-container">
+          <div class="image-container">
+            <img src="images/market_demand_1.png" alt="市场规模增长趋势图">
+          </div>
+          <p class="caption">市场规模增长趋势</p>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="card chart-card analysis-card">
+          <div class="analysis-header">
+            <div class="analysis-title">应用场景分析</div>
+            <div class="analysis-subtitle">基于288个公开医疗大模型案例</div>
+          </div>
+          <div class="image-container">
+            <img src="images/market_demand_2.png" alt="应用场景分布图">
+          </div>
+          <div class="description">
+            <p style="margin:0"><strong>医疗服务场景：53%</strong> (430次提及), 涵盖 <strong>12</strong> 类应用, <strong>56</strong> 个细分领域。</p>
+            <p style="margin:5px 0 0 0"><strong>核心应用：</strong>临床专病辅助决策、预问诊、病历辅助生成、医学影像辅助诊断。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

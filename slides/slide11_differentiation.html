@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>差异化竞争策略</title>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scaleIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #1c2333, #2a344a);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 40px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .header h1 {
+      font-size: 40px;
+      font-weight: 600;
+      text-align: center;
+      margin: 0 0 25px 0;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .main-content {
+      display: flex;
+      gap: 30px;
+      flex-grow: 1;
+      animation: fadeIn 1s ease-in-out 0.2s;
+      animation-fill-mode: backwards;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 25px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .card-1 .card-title { color: #5d9cec; }
+    .card-2 .card-title { color: #62c462; }
+    .card-3 .card-title { color: #f8c053; }
+    
+    .card-icon {
+      font-size: 28px;
+    }
+
+    .core-idea {
+      font-size: 16px;
+      font-style: italic;
+      color: #b0c4de;
+      padding: 8px 0;
+      margin-bottom: 15px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .card-content ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #d3dff3;
+      flex-grow: 1;
+    }
+
+    .card-content li {
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    .card-content li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    .card-1 .card-content li::before { color: #5d9cec; }
+    .card-2 .card-content li::before { color: #62c462; }
+    .card-3 .card-content li::before { color: #f8c053; }
+
+    .highlight-box {
+        background: rgba(0,0,0,0.2);
+        border-radius: 8px;
+        padding: 12px;
+        margin-top: 10px;
+    }
+    
+    .highlight-box .highlight-title {
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #fff;
+    }
+    
+    .highlight-value {
+        font-size: 18px;
+        font-weight: bold;
+        color: #62c462;
+        display: block;
+        text-align: center;
+        margin-top: 5px;
+    }
+    .highlight-value:last-child {
+        margin-top: 10px;
+    }
+    
+    .advantage {
+      margin-top: auto;
+      padding-top: 15px;
+      font-size: 16px;
+      font-weight: bold;
+      text-align: center;
+      border-top: 1px dashed rgba(255,255,255,0.2);
+    }
+    .card-1 .advantage { color: #87baff; }
+    .card-2 .advantage { color: #88d988; }
+    .card-3 .advantage { color: #f9d180; }
+
+
+    .footer {
+      margin-top: 25px;
+      animation: fadeIn 1s ease-in-out 0.4s;
+      animation-fill-mode: backwards;
+    }
+    
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      padding-top: 30px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 10%;
+      width: 80%;
+      height: 3px;
+      background-color: rgba(255, 255, 255, 0.2);
+      z-index: 1;
+    }
+
+    .timeline-item {
+      flex: 1;
+      text-align: center;
+      position: relative;
+      padding: 0 15px;
+      z-index: 2;
+    }
+
+    .timeline-item::before {
+      content: attr(data-stage);
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #1c2333;
+      border: 3px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+    
+    .timeline-item:hover::before {
+        transform: translateX(-50%) scale(1.1);
+    }
+
+    .timeline-item:nth-child(1)::before { border-color: #5d9cec; color: #5d9cec; }
+    .timeline-item:nth-child(2)::before { border-color: #62c462; color: #62c462; }
+    .timeline-item:nth-child(3)::before { border-color: #f8c053; color: #f8c053; }
+    
+    .timeline-item h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 15px 0 8px 0;
+    }
+    .timeline-item:nth-child(1) h3 { color: #5d9cec; }
+    .timeline-item:nth-child(2) h3 { color: #62c462; }
+    .timeline-item:nth-child(3) h3 { color: #f8c053; }
+
+    .timeline-item p {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #b0c4de;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="header">
+      <h1>差异化竞争策略：三大核心定位</h1>
+    </div>
+
+    <div class="main-content">
+      <div class="card card-1">
+        <h2 class="card-title"><span class="card-icon">🔗</span>最后一公里深度融合</h2>
+        <p class="core-idea">不做独立应用，做"隐形助手"</p>
+        <div class="card-content">
+          <ul>
+            <li>无缝嵌入EMR、CDSS等核心系统</li>
+            <li>医生写病历时自动生成初稿</li>
+            <li>审方时智能提示风险</li>
+            <li>成为日常工作流中的"数字同事"</li>
+          </ul>
+        </div>
+        <p class="advantage">优势: 降低学习成本，提升接受度</p>
+      </div>
+
+      <div class="card card-2">
+        <h2 class="card-title"><span class="card-icon">📈</span>可量化的临床与经济价值</h2>
+        <p class="core-idea">从技术比拼转向价值证明</p>
+        <div class="card-content">
+          <ul>
+            <li>诊断准确率提升百分比</li>
+            <li>医院运营成本节约金额</li>
+            <li>患者等待时间缩短时长</li>
+            <li>病历质量改善率</li>
+          </ul>
+          <div class="highlight-box">
+             <div class="highlight-title">案例示例:</div>
+             <span class="highlight-value">AI辅助诊断准确率提升90%以上</span>
+             <span class="highlight-value">医疗文书生成效率提升60-80%</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card card-3">
+        <h2 class="card-title"><span class="card-icon">🔒</span>数据安全与合规底线</h2>
+        <p class="core-idea">"数据不出院"与本地化部署</p>
+        <div class="card-content">
+          <ul>
+            <li>严格遵守国家数据安全法规</li>
+            <li>支持私有化部署模式</li>
+            <li>建立完善的数据治理体系</li>
+            <li>提供数据追溯和审计功能</li>
+          </ul>
+        </div>
+        <p class="advantage">价值: 打消医院后顾之忧，构建信任壁垒</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="timeline">
+        <div class="timeline-item" data-stage="1">
+          <h3>第一阶段：深度融合</h3>
+          <p>将AI能力无缝嵌入现有产品<br>与标杆医院共建创新实验室</p>
+        </div>
+        <div class="timeline-item" data-stage="2">
+          <h3>第二阶段：价值证明</h3>
+          <p>建立严谨的临床验证体系<br>发布权威的效果评估报告</p>
+        </div>
+        <div class="timeline-item" data-stage="3">
+          <h3>第三阶段：规模化推广</h3>
+          <p>以数据为驱动的市场扩展<br>构建可持续的竞争优势</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

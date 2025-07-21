@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>竞争格局分类：七大玩家类型解析</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background-color: #0d1b2a;
+            color: #ffffff;
+            font-family: 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 1160px;
+            height: 640px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 320px 1fr 320px;
+            grid-template-rows: 60px 1fr;
+            grid-column-gap: 40px;
+            align-items: center;
+        }
+
+        .slide-title {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #ffffff;
+            align-self: start;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .left-column, .right-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .player-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px 15px 10px 25px;
+            position: relative;
+            border-left: 5px solid transparent;
+            transition: all 0.3s ease;
+            animation: fadeInLeft 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .player-card:hover {
+            transform: translateX(5px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .player-card:after {
+            content: '';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 2px;
+            background-color: #4a5568;
+        }
+
+        .player-card-title {
+            font-size: 15px;
+            font-weight: 500;
+            margin: 0 0 4px 0;
+            color: #E0E0E0;
+        }
+        
+        .player-card-title strong {
+            font-weight: 700;
+            color: #FFF;
+        }
+
+        .player-card-desc {
+            font-size: 13px;
+            color: #B0B0B0;
+            margin: 0;
+        }
+
+        /* Player card colors and animation delays */
+        .player-card:nth-child(1) { border-color: #5A8DEE; animation-delay: 0.1s; }
+        .player-card:nth-child(2) { border-color: #4DD0E1; animation-delay: 0.2s; }
+        .player-card:nth-child(3) { border-color: #FFB74D; animation-delay: 0.3s; }
+        .player-card:nth-child(4) { border-color: #81C784; animation-delay: 0.4s; }
+        .player-card:nth-child(5) { border-color: #BA68C8; animation-delay: 0.5s; }
+        .player-card:nth-child(6) { border-color: #F06292; animation-delay: 0.6s; }
+        .player-card:nth-child(7) { border-color: #90A4AE; animation-delay: 0.7s; }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .center-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: zoomIn 1s ease-out;
+        }
+        
+        .center-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .summary-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            animation: fadeInRight 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .summary-card:hover {
+            transform: translateX(-5px);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .summary-card:before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 25px;
+            height: 2px;
+            background-color: #4a5568;
+        }
+
+        .right-column {
+            justify-content: space-around;
+        }
+
+        .summary-icon {
+            width: 40px;
+            height: 40px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .summary-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .summary-content .summary-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+            color: #ffffff;
+        }
+
+        .summary-content .summary-desc {
+            font-size: 14px;
+            color: #B0B0B0;
+            margin: 0;
+        }
+        
+        /* Summary card animation delays */
+        .summary-card:nth-child(1) { animation-delay: 0.1s; }
+        .summary-card:nth-child(2) { animation-delay: 0.2s; }
+        .summary-card:nth-child(3) { animation-delay: 0.3s; }
+        .summary-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slide">
+        <div class="container">
+            <h1 class="slide-title">竞争格局分类：七大玩家类型解析</h1>
+
+            <div class="left-column">
+                <div class="player-card">
+                    <p class="player-card-title"><strong>传统医疗信息化厂商</strong></p>
+                    <p class="player-card-desc">代表：卫宁健康、东软集团、创业慧康</p>
+                    <p class="player-card-desc">优势：深厚医院资源和数据积累</p>
+                </div>
+                <div class="player-card">
+                    <p class="player-card-title"><strong>互联网医疗平台</strong></p>
+                    <p class="player-card-desc">代表：平安好医生、京东健康、阿里健康</p>
+                    <p class="player-card-desc">优势：流量和生态优势</p>
+                </div>
+                <div class="player-card">
+                    <p class="player-card-title"><strong>AI医疗科技公司</strong></p>
+                    <p class="player-card-desc">代表：科大讯飞医疗、医渡科技、森亿智能</p>
+                    <p class="player-card-desc">优势：技术创新和数据积累</p>
+                </div>
+                <div class="player-card">
+                    <p class="player-card-title"><strong>三大运营商</strong></p>
+                    <p class="player-card-desc">代表：中国移动、中国电信、中国联通</p>
+                    <p class="player-card-desc">优势：算力和网络基础设施</p>
+                </div>
+                <div class="player-card">
+                    <p class="player-card-title"><strong>国内头部科技企业</strong></p>
+                    <p class="player-card-desc">代表：腾讯、百度、阿里云、DeepSeek</p>
+                    <p class="player-card-desc">优势：强大研发和生态协同</p>
+                </div>
+                <div class="player-card">
+                    <p class="player-card-title"><strong>跨界科技巨头</strong></p>
+                    <p class="player-card-desc">代表：微软、IBM、亚马逊、英伟达</p>
+                    <p class="player-card-desc">优势：领先AI技术和云平台</p>
+                </div>
+                <div class="player-card">
+                    <p class="player-card-title"><strong>科研院所</strong></p>
+                    <p class="player-card-desc">代表：中科院、浙江大学、北京大学</p>
+                    <p class="player-card-desc">优势：深厚理论和人才储备</p>
+                </div>
+            </div>
+
+            <div class="center-image">
+                <img src="images/competitor_types.png" alt="竞争者分类图">
+            </div>
+
+            <div class="right-column">
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 4.8V19.2C4 20.1941 4.80589 21 5.8 21H20V4H5.8C4.80589 4 4 4.80589 4 4.8ZM8 10H6V18H8V10ZM12 7H10V18H12V7ZM16 13H14V18H16V13Z" fill="#4DD0E1"/></svg>
+                    </div>
+                    <div class="summary-content">
+                        <p class="summary-title">百模大战</p>
+                        <p class="summary-desc">288个医疗大模型激烈竞争</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.94 2.05029L8.49999 4.50029L10.94 6.95029L13.38 4.50029L10.94 2.05029ZM8.81001 8.81029L3.5 10.9403L8.81001 13.0703L13.12 10.9403L8.81001 8.81029ZM18.99 10.9403L15.42 13.0703L18.99 15.2003L22.56 13.0703L18.99 10.9403ZM10.94 15.0503L8.49999 17.5003L10.94 19.9503L13.38 17.5003L10.94 15.0503Z" fill="#FFB74D"/></svg>
+                    </div>
+                    <div class="summary-content">
+                        <p class="summary-title">市场分化</p>
+                        <p class="summary-desc">不同类型玩家各有优势</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 7H14V9H17C18.65 9 20 10.35 20 12C20 13.65 18.65 15 17 15H14V17H17C19.76 17 22 14.76 22 12C22 9.24 19.76 7 17 7ZM7 15H10V17H7C4.24 17 2 14.76 2 12C2 9.24 4.24 7 7 7H10V9H7C5.35 9 4 10.35 4 12C4 13.65 5.35 15 7 15ZM8 11H16V13H8V11Z" fill="#81C784"/></svg>
+                    </div>
+                    <div class="summary-content">
+                        <p class="summary-title">技术融合</p>
+                        <p class="summary-desc">大模型+小模型组合成趋势</p>
+                    </div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08C17.24 15.54 16.17 15.25 15 15.25C13.83 15.25 12.76 15.54 12 16.08V19H18V16.08ZM15 14C16.66 14 18 12.66 18 11C18 9.34 16.66 8 15 8C13.34 8 12 9.34 12 11C12 12.66 13.34 14 15 14ZM20 19H22V16.08C21.24 15.54 20.17 15.25 19 15.25C18.9 15.25 18.79 15.26 18.69 15.28C19.5 15.9 20 16.86 20 18V19ZM9 14C10.66 14 12 12.66 12 11C12 9.34 10.66 8 9 8C7.34 8 6 9.34 6 11C6 12.66 7.34 14 9 14ZM9 15.25C7.83 15.25 6.76 15.54 6 16.08V19H12V16.08C11.24 15.54 10.17 15.25 9 15.25ZM4 19H5.5C5.5 17.65 6.22 16.48 7.25 15.7C6.5 15.42 5.66 15.25 4.75 15.25C3.83 15.25 2.76 15.54 2 16.08V19H4Z" fill="#5A8DEE"/></svg>
+                    </div>
+                    <div class="summary-content">
+                        <p class="summary-title">生态协同</p>
+                        <p class="summary-desc">跨界合作与产学研协同</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

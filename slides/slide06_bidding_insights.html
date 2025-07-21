@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>招投标市场洞察</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans SC', 'Helvetica Neue', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background: linear-gradient(135deg, #010f24 0%, #03183d 100%);
+      color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      padding: 40px;
+      box-sizing: border-box;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(6, 42, 97, 0.4) 0%, rgba(6, 42, 97, 0) 60%);
+      animation: rotate-glow 20s linear infinite;
+    }
+
+    @keyframes rotate-glow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .header h1 {
+      font-size: 36px;
+      font-weight: 500;
+      text-align: center;
+      margin: 0 0 30px 0;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(0, 191, 255, 0.5);
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      gap: 25px;
+      z-index: 1;
+    }
+
+    .top-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 25px;
+      animation: fadeInUp 1s ease-out 0.2s backwards;
+    }
+
+    .card {
+      background: rgba(14, 43, 85, 0.5);
+      border: 1px solid rgba(0, 191, 255, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 191, 255, 0.3);
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 15px;
+      color: #a0c8ff;
+    }
+    
+    .card-value {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    
+    .card-value.blue {
+      color: #00bfff;
+      text-shadow: 0 0 10px #00bfff;
+    }
+    
+    .card-value.green {
+      color: #32cd32;
+      text-shadow: 0 0 10px #32cd32;
+    }
+
+    .card-value-small {
+        font-size: 16px;
+        font-weight: 300;
+        color: #b0b0b0;
+        margin-top: 5px;
+    }
+    
+    .rate-value {
+        font-size: 44px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        background: linear-gradient(90deg, #00bfff, #32cd32);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 12px;
+      background-color: rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .progress-bar {
+      height: 100%;
+      border-radius: 6px;
+    }
+    
+    .progress-bar.green {
+        background: linear-gradient(90deg, #28a745, #32cd32);
+    }
+    
+    .progress-bar.blue {
+        background: linear-gradient(90deg, #17a2b8, #00bfff);
+    }
+
+    .middle-panel {
+      background: rgba(14, 43, 85, 0.5);
+      border: 1px solid rgba(0, 191, 255, 0.3);
+      border-radius: 12px;
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      animation: fadeInUp 1s ease-out 0.4s backwards;
+    }
+
+    .chart-container h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin: 0 0 20px 0;
+      color: #a0c8ff;
+      text-align: left;
+    }
+
+    .bar-chart {
+      width: 100%;
+      flex-grow: 1;
+    }
+
+    .bar-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .bar-label {
+      width: 120px;
+      text-align: right;
+      padding-right: 15px;
+      color: #c0dfff;
+    }
+    
+    .bar-wrapper {
+        flex-grow: 1;
+        background-color: rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+
+    .bar {
+      height: 22px;
+      line-height: 22px;
+      border-radius: 5px;
+      color: white;
+      text-align: right;
+      padding-right: 10px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      transition: width 1s ease-out;
+      animation: bar-fill 1s ease-out;
+    }
+    
+    @keyframes bar-fill {
+        from { width: 0 !important; }
+    }
+
+    .bar.sichuan { background: linear-gradient(90deg, #4CAF50, #81C784); }
+    .bar.guangdong { background: linear-gradient(90deg, #4CAF50, #a5d6a7); }
+    .bar.zhejiang { background: linear-gradient(90deg, #2196F3, #64B5F6); }
+    .bar.other { background: linear-gradient(90deg, #5c6bc0, #9fa8da); }
+
+
+    .bottom-panel {
+      animation: fadeInUp 1s ease-out 0.6s backwards;
+    }
+    
+    .bottom-panel h2 {
+      font-size: 20px;
+      font-weight: 500;
+      color: #a0c8ff;
+      margin-bottom: 15px;
+      border-left: 4px solid #00bfff;
+      padding-left: 10px;
+    }
+    
+    .insights-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+    }
+
+    .insights-list li {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #d0e0ff;
+      display: flex;
+      align-items: flex-start;
+    }
+    
+    .insights-list li::before {
+      content: '▶';
+      color: #00bfff;
+      margin-right: 10px;
+      font-size: 12px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    .insights-list strong {
+        color: #fdd835;
+        font-weight: 500;
+    }
+    
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slide">
+    <div class="header">
+      <h1>招投标市场洞察：市场温度与竞争激烈程度</h1>
+    </div>
+
+    <div class="main-content">
+      <div class="top-panel">
+        <div class="card">
+          <div class="card-title">项目数据</div>
+          <div class="card-value blue">745<span style="font-size: 24px; margin-left: 5px;">个</span></div>
+          <div class="card-value-small">招标项目</div>
+          <div class="card-value green" style="margin-top: 15px;">258<span style="font-size: 24px; margin-left: 5px;">个</span></div>
+          <div class="card-value-small">中标项目</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">中标率</div>
+          <div class="rate-value">34.63%</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar green" style="width: 34.63%;"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">资金数据</div>
+          <div class="card-value blue">42.88<span style="font-size: 24px; margin-left: 5px;">亿元</span></div>
+          <div class="card-value-small">总预算</div>
+          <div class="card-value green" style="margin-top: 15px;">7.34<span style="font-size: 24px; margin-left: 5px;">亿元</span></div>
+          <div class="card-value-small">中标总额</div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title">预算达成率</div>
+          <div class="rate-value">17.11%</div>
+          <div class="progress-bar-container">
+            <div class="progress-bar blue" style="width: 17.11%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="middle-panel">
+        <div class="chart-container">
+          <h2>地域分布核心区 (按招标项目数)</h2>
+          <div class="bar-chart">
+            <div class="bar-item">
+              <div class="bar-label">四川省</div>
+              <div class="bar-wrapper">
+                <div class="bar sichuan" style="width: 100%;">107个 (领跑全国)</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">广东省</div>
+              <div class="bar-wrapper">
+                <div class="bar guangdong" style="width: 99.06%;">106个</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">浙江省</div>
+              <div class="bar-wrapper">
+                <div class="bar zhejiang" style="width: 77.57%;">83个</div>
+              </div>
+            </div>
+             <div class="bar-item">
+              <div class="bar-label">新疆</div>
+              <div class="bar-wrapper">
+                <div class="bar other" style="width: 41.12%;">44个</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">江苏省</div>
+              <div class="bar-wrapper">
+                <div class="bar other" style="width: 39.25%;">42个</div>
+              </div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-label">福建省</div>
+              <div class="bar-wrapper">
+                <div class="bar other" style="width: 34.58%;">37个</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-panel">
+        <h2>核心洞察</h2>
+        <ul class="insights-list">
+          <li>市场需求在地理上高度集中，<strong>四川、广东、浙江</strong>为核心区。</li>
+          <li>中标率仅为34.63%，反映竞争激烈程度。</li>
+          <li>预算达成率低于20%，说明实际中标价格较预算有所下降。</li>
+          <li>市场总体表现出需求旺盛但竞争激烈的特征。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

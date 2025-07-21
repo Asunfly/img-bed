@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>目录 - Presentation</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans SC', 'PingFang SC', 'Helvetica Neue', 'Microsoft YaHei', sans-serif;
+      background-color: #F8F9FC;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .slide {
+      width: 1280px;
+      height: 720px;
+      background-color: #F8F9FC;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 60px 80px;
+      position: relative;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .header {
+      display: flex;
+      align-items: baseline;
+      margin-bottom: 40px;
+      padding-left: 5px;
+    }
+    .header-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1D2129;
+      margin: 0;
+    }
+    .header-subtitle {
+      font-size: 20px;
+      font-weight: 500;
+      color: #007AFF;
+      margin: 0 0 0 16px;
+      letter-spacing: 1px;
+    }
+    .content-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      flex-grow: 1;
+    }
+    .card {
+      background-color: #FFFFFF;
+      border-radius: 12px;
+      border-top: 5px solid;
+      box-shadow: 0 6px 20px rgba(29, 33, 41, 0.08);
+      padding: 30px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(29, 33, 41, 0.12);
+    }
+    .card-1 { border-color: #007AFF; }
+    .card-2 { border-color: #34C759; }
+    .card-3 { border-color: #FF9500; }
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 35px;
+    }
+    .card-number {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .card-1 .card-number { color: #007AFF; }
+    .card-2 .card-number { color: #34C759; }
+    .card-3 .card-number { color: #FF9500; }
+    .card-title-group {
+      margin-left: 16px;
+      padding-top: 5px;
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1D2129;
+    }
+    .card-subtitle {
+      font-size: 13px;
+      color: #86909C;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .list-item {
+      display: flex;
+      align-items: flex-start;
+    }
+    .list-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2.5px solid;
+      flex-shrink: 0;
+      margin-right: 15px;
+      margin-top: 2px;
+      box-sizing: border-box;
+    }
+    .card-1 .list-icon { border-color: #BDE3FF; }
+    .card-2 .list-icon { border-color: #B4E8C1; }
+    .card-3 .list-icon { border-color: #FFE0B3; }
+    .list-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .item-title {
+      font-size: 16px;
+      color: #4E5969;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .item-detail {
+      font-size: 13px;
+      color: #86909C;
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+    .footer-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, #007AFF, #34C759, #FF9500);
+    }
+  </style>
+</head>
+<body>
+  <div class="slide">
+    <header class="header">
+      <h1 class="header-title">目录</h1>
+      <span class="header-subtitle">CONTENTS</span>
+    </header>
+    <main class="content-grid">
+      <div class="card card-1">
+        <div class="card-header">
+          <span class="card-number">01</span>
+          <div class="card-title-group">
+            <h2 class="card-title">行业宏观环境分析</h2>
+            <p class="card-subtitle">Macro Environment</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">政策驱动</span>
+              <span class="item-detail">14项重要政策密集发布</span>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">技术趋势</span>
+              <span class="item-detail">从通用到垂直的发展路径</span>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">市场需求</span>
+              <span class="item-detail">82亿→260亿元市场增长</span>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">招投标分析</span>
+              <span class="item-detail">745个项目深度洞察</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-2">
+        <div class="card-header">
+          <span class="card-number">02</span>
+          <div class="card-title-group">
+            <h2 class="card-title">市场竞争格局分析</h2>
+            <p class="card-subtitle">Competitive Landscape</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">竞争者分类</span>
+              <span class="item-detail">七大玩家类型解析</span>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">市场份额</span>
+              <span class="item-detail">“百模大战”与集中度分析</span>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">竞争态势</span>
+              <span class="item-detail">厂商实力矩阵评估</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card card-3">
+        <div class="card-header">
+          <span class="card-number">03</span>
+          <div class="card-title-group">
+            <h2 class="card-title">产品竞争战略框架</h2>
+            <p class="card-subtitle">Product Strategy</p>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">差异化定位</span>
+              <span class="item-detail">最后一公里融合策略</span>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">技术路径</span>
+              <span class="item-detail">大模型+小模型创新</span>
+            </div>
+          </div>
+          <div class="list-item">
+            <div class="list-icon"></div>
+            <div class="list-text-group">
+              <span class="item-title">商业模式</span>
+              <span class="item-detail">AIaaS与效果付费演进</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="footer-bar"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中标厂商实力矩阵</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1280px;
+      height: 720px;
+      background-color: #0A192F;
+      color: #E0E0E0;
+      font-family: 'Noto Sans SC', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 20px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .main-title {
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      color: #CCD6F6;
+      margin-bottom: 15px;
+      flex-shrink: 0;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 3fr 4fr 2.5fr;
+      gap: 20px;
+      flex-grow: 1;
+      height: calc(100% - 130px); /* Adjust height to fit insights */
+    }
+
+    .panel {
+      background-color: rgba(17, 34, 64, 0.5);
+      border-radius: 8px;
+      padding: 15px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: #64FFDA;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba(136, 146, 176, 0.3);
+    }
+    
+    /* Left Panel: Top 10 List */
+    .top-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      flex-grow: 1;
+    }
+
+    .list-item {
+      display: flex;
+      align-items: center;
+      padding: 5px 0;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(136, 146, 176, 0.1);
+      transition: background-color 0.3s ease;
+    }
+    .list-item:last-child {
+        border-bottom: none;
+    }
+    .list-item:hover {
+        background-color: rgba(100, 255, 218, 0.1);
+    }
+
+    .rank {
+      font-weight: 700;
+      font-size: 14px;
+      width: 30px;
+      text-align: center;
+      color: #A8B2D1;
+    }
+    .rank-1, .rank-2, .rank-3 {
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .rank-1 { background-image: linear-gradient(180deg, #FFD700, #F0B400); }
+    .rank-2 { background-image: linear-gradient(180deg, #C0C0C0, #A9A9A9); }
+    .rank-3 { background-image: linear-gradient(180deg, #CD7F32, #B87333); }
+
+    .company-name {
+      flex-grow: 1;
+      color: #CCD6F6;
+    }
+
+    .amount-info {
+      text-align: right;
+    }
+
+    .amount {
+      font-size: 14px;
+      font-weight: 500;
+      color: #E0E0E0;
+    }
+
+    .projects {
+      font-size: 11px;
+      color: #8892B0;
+    }
+
+    /* Center Panel: Matrix */
+    .matrix-container {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 5px;
+      flex-grow: 1;
+    }
+    .quadrant {
+      border-radius: 6px;
+      padding: 15px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .quadrant:hover {
+        transform: scale(1.03);
+        z-index: 10;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .quadrant h3 {
+        margin: 0 0 5px 0;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    .quadrant p {
+        margin: 2px 0;
+        font-size: 12px;
+        color: #A8B2D1;
+    }
+    .quadrant .rep {
+        margin-top: 10px;
+        background-color: rgba(10, 25, 47, 0.7);
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        align-self: flex-start;
+    }
+
+    /* Quadrant specific styles */
+    .q1 { background-color: #12353E; color: #75E6DA; } /* Niche */
+    .q2 { background-color: #2E3B4E; color: #82AAFF; } /* Leaders */
+    .q3 { background-color: #3E2F3D; color: #FF9E9E; } /* Emerging */
+    .q4 { background-color: #3E3B32; color: #FFCB6B; } /* Penetraters */
+    
+    .axis-label {
+      position: absolute;
+      color: #8892B0;
+      font-size: 12px;
+    }
+    .x-axis {
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .y-axis {
+      top: 50%;
+      left: -30px;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+    .y-axis-label {
+      position: absolute;
+      color: #8892B0;
+      font-size: 12px;
+      top: 50%;
+      left: -20px;
+      transform: translateY(-50%) rotate(-90deg);
+    }
+    .x-axis-label {
+      position: absolute;
+      color: #8892B0;
+      font-size: 12px;
+      bottom: -20px;
+      right: 0px;
+    }
+    
+    /* Right Panel: Key Data */
+    .key-data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+      flex-grow: 1;
+    }
+    .data-card {
+      background-color: rgba(17, 34, 64, 0.8);
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+    .data-card .label {
+      font-size: 13px;
+      color: #A8B2D1;
+      margin-bottom: 5px;
+    }
+    .data-card .value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #64FFDA;
+      line-height: 1.1;
+    }
+    .data-card .unit {
+      font-size: 14px;
+      color: #A8B2D1;
+    }
+    .data-card .note {
+        font-size: 10px;
+        color: #8892B0;
+        margin-top: 4px;
+    }
+
+    /* Bottom Section: Core Insights */
+    .insights-container {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0px;
+        background-color: rgba(10, 25, 47, 0.5);
+        border-radius: 8px;
+        font-size: 12px;
+        color: #A8B2D1;
+        flex-shrink: 0;
+        margin-top: 15px;
+    }
+    .insight-item {
+        display: flex;
+        align-items: center;
+    }
+    .insight-item::before {
+        content: '●';
+        color: #64FFDA;
+        margin-right: 8px;
+        font-size: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="main-title">中标厂商实力矩阵：四象限竞争格局</h1>
+    <div class="content-grid">
+      
+      <!-- Left Panel -->
+      <div class="panel">
+        <h2 class="panel-title">TOP 10 中标厂商排名</h2>
+        <ul class="top-list">
+          <li class="list-item"><span class="rank rank-1">1</span><span class="company-name">讯飞医疗科技</span><div class="amount-info"><div class="amount">5,261.94万</div><div class="projects">4个项目</div></div></li>
+          <li class="list-item"><span class="rank rank-2">2</span><span class="company-name">杭州全诊医学科技</span><div class="amount-info"><div class="amount">4,132.2万</div><div class="projects">10个项目</div></div></li>
+          <li class="list-item"><span class="rank rank-3">3</span><span class="company-name">中移动浙江宁波分公司</span><div class="amount-info"><div class="amount">4,080.0万</div><div class="projects">3个项目</div></div></li>
+          <li class="list-item"><span class="rank">4</span><span class="company-name">紫光软件系统</span><div class="amount-info"><div class="amount">3,772.0万</div><div class="projects">2个项目</div></div></li>
+          <li class="list-item"><span class="rank">5</span><span class="company-name">卫宁健康科技集团</span><div class="amount-info"><div class="amount">3,742.0万</div><div class="projects">2个项目</div></div></li>
+          <li class="list-item"><span class="rank">6</span><span class="company-name">东华医为科技</span><div class="amount-info"><div class="amount">3,027.38万</div><div class="projects">2个项目</div></div></li>
+          <li class="list-item"><span class="rank">7</span><span class="company-name">中电鸿信信息科技</span><div class="amount-info"><div class="amount">2,600.0万</div><div class="projects">2个项目</div></div></li>
+          <li class="list-item"><span class="rank">8</span><span class="company-name">四川中移通信技术</span><div class="amount-info"><div class="amount">2,140.0万</div><div class="projects">1个项目</div></div></li>
+          <li class="list-item"><span class="rank">9</span><span class="company-name">国药集团北京医疗器械</span><div class="amount-info"><div class="amount">1,820.0万</div><div class="projects">1个项目</div></div></li>
+          <li class="list-item"><span class="rank">10</span><span class="company-name">慧信科技（天津）</span><div class="amount-info"><div class="amount">1,596.0万</div><div class="projects">2个项目</div></div></li>
+        </ul>
+      </div>
+
+      <!-- Center Panel -->
+      <div class="panel" style="background-color: transparent; padding: 0; position:relative;">
+        <span class="y-axis-label">项目金额 → 高</span>
+        <div class="matrix-container">
+          <div class="quadrant q1">
+            <h3>利基专家</h3>
+            <p>项目少、金额高</p>
+            <div class="rep">代表: 讯飞医疗</div>
+          </div>
+          <div class="quadrant q2">
+            <h3>市场领导者</h3>
+            <p>项目多、金额高</p>
+            <div class="rep">代表: 杭州全诊</div>
+          </div>
+          <div class="quadrant q3">
+            <h3>新兴参与者</h3>
+            <p>项目少、金额低</p>
+            <div class="rep">代表: 大量初创公司</div>
+          </div>
+          <div class="quadrant q4">
+            <h3>市场渗透者</h3>
+            <p>项目多、金额低</p>
+            <div class="rep">代表: 部分运营商</div>
+          </div>
+        </div>
+        <span class="x-axis-label">项目数量 → 多</span>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="panel">
+        <h2 class="panel-title">关键数据指标</h2>
+        <div class="key-data-grid">
+            <div class="data-card">
+                <div class="label">平均中标金额</div>
+                <div class="value">270.68</div>
+                <div class="unit">万</div>
+            </div>
+            <div class="data-card">
+                <div class="label">中位数金额</div>
+                <div class="value">96.80</div>
+                <div class="unit">万</div>
+                <div class="note">更反映市场一般规模</div>
+            </div>
+            <div class="data-card">
+                <div class="label">最大项目金额</div>
+                <div class="value">4,811.93</div>
+                <div class="unit">万</div>
+            </div>
+            <div class="data-card">
+                <div class="label">最小项目金额</div>
+                <div class="value">0.01</div>
+                <div class="unit">万</div>
+            </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="insights-container">
+        <div class="insight-item">市场集中度明显，TOP 3厂商占主导</div>
+        <div class="insight-item">中位数远低于平均值，大项目拉高平均</div>
+        <div class="insight-item">医疗信息化龙头在AI时代优势依旧</div>
+        <div class="insight-item">运营商凭基础设施优势表现突出</div>
+    </div>
+  </div>
+</body>
+</html>

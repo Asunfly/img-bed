@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280, initial-scale=1.0">
+  <title>市场集中度分析："百模大战"与渗透现状</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      background-color: #0d1b2a;
+      color: #e0e1dd;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      padding: 30px 50px 10px;
+      text-align: center;
+      border-bottom: 1px solid rgba(129, 178, 202, 0.2);
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      color: #ffffff;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .header h2 {
+      font-size: 20px;
+      color: #81b2ca;
+      margin: 5px 0 0;
+      font-weight: 400;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px 40px;
+      background-color: rgba(23, 58, 83, 0.3);
+      animation: fadeIn 0.5s ease-out 0.2s forwards;
+      opacity: 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+    }
+
+    .stat-number {
+      font-size: 40px;
+      font-weight: 700;
+      color: #5ce1e6;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: #a4c8d8;
+      margin-top: 5px;
+    }
+
+    .main-content {
+      flex-grow: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding: 25px 50px;
+      animation: fadeIn 0.5s ease-out 0.4s forwards;
+      opacity: 0;
+    }
+
+    .content-column {
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid rgba(129, 178, 202, 0.2);
+    }
+    
+    .content-column h3 {
+      font-size: 22px;
+      color: #ffffff;
+      border-bottom: 2px solid #5ce1e6;
+      padding-bottom: 10px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .content-column ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .content-column li {
+      margin-bottom: 15px;
+      font-size: 16px;
+      line-height: 1.6;
+      padding-left: 25px;
+      position: relative;
+    }
+
+    .content-column li::before {
+      content: '■';
+      position: absolute;
+      left: 0;
+      top: 0px;
+      color: #5ce1e6;
+      font-size: 14px;
+    }
+    
+    .content-column .sub-list {
+        padding-left: 20px;
+        margin-top: 8px;
+        font-size: 15px;
+        color: #b0d0e0;
+    }
+    .content-column .sub-list li::before {
+        content: '▶';
+        font-size: 12px;
+    }
+
+    .content-column strong {
+      color: #f7b801;
+      font-weight: 600;
+    }
+    
+    .charts-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 50px 30px;
+      gap: 30px;
+      animation: fadeIn 0.5s ease-out 0.6s forwards;
+      opacity: 0;
+    }
+
+    .chart-item {
+      flex: 1;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.03);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(129, 178, 202, 0.2);
+    }
+
+    .chart-item img {
+      max-width: 100%;
+      height: auto;
+      max-height: 180px; /* Adjust height to fit layout */
+      border-radius: 4px;
+    }
+
+    .chart-item p {
+      margin: 8px 0 0;
+      font-size: 14px;
+      color: #a4c8d8;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <header class="header">
+      <h1>市场集中度分析</h1>
+      <h2>"百模大战"与渗透现状</h2>
+    </header>
+
+    <section class="stats-container">
+      <div class="stat-item">
+        <p class="stat-number">288<span style="font-size: 20px;">个</span></p>
+        <p class="stat-label">医疗大模型 (截至2025年5月)</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">133<span style="font-size: 20px;">个</span></p>
+        <p class="stat-label">新发布模型 (2025年新增)</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">90<span style="font-size: 20px;">%</span></p>
+        <p class="stat-label">覆盖政策指引重点应用场景</p>
+      </div>
+      <div class="stat-item">
+        <p class="stat-number">10-20<span style="font-size: 20px;">%</span></p>
+        <p class="stat-label">当前渗透率 (仍处初期)</p>
+      </div>
+    </section>
+
+    <main class="main-content" style="padding-bottom: 0; flex-grow: 0;">
+      <div class="content-column">
+        <h3>“百模大战”特征</h3>
+        <ul>
+          <li><strong>1. 参与者众多且多元化</strong>
+            <ul class="sub-list">
+              <li>医疗健康领域占中国行业大模型<strong>21.9%</strong> (位居首位)</li>
+              <li>超越金融领域的12.8%</li>
+            </ul>
+          </li>
+          <li><strong>2. 竞争充分但分散</strong>
+            <ul class="sub-list">
+              <li>各类玩家利用自身禀赋切入细分市场</li>
+              <li>尚未出现绝对垄断的巨头</li>
+            </ul>
+          </li>
+          <li><strong>3. 技术路线多样化</strong>
+            <ul class="sub-list">
+              <li>自研模型 vs 开源模型微调</li>
+              <li>通用大模型 vs 垂直小模型</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="content-column">
+        <h3>市场集中度现状</h3>
+        <ul>
+          <li><strong>传统领域集中度较高</strong>
+            <ul class="sub-list">
+              <li>电子病历系统：头部几家占据主要份额</li>
+              <li>HIS、区域健康平台：老牌厂商稳固基础</li>
+            </ul>
+          </li>
+          <li><strong>AI应用市场较分散</strong>
+            <ul class="sub-list">
+              <li>智能影像：上百款AI产品和数十家创业公司</li>
+              <li>智能问诊：BAT等大厂与创业公司并存</li>
+            </ul>
+          </li>
+          <li><strong>未来预期</strong>
+            <ul class="sub-list">
+              <li>将进入新一轮整合期，优势企业在细分领域形成领先</li>
+              <li>“一超多强”格局逐步形成</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <footer class="charts-container">
+      <div class="chart-item">
+        <img src="images/market_concentration_1.png" alt="市场集中度分析图">
+        <p>市场集中度分析图</p>
+      </div>
+      <div class="chart-item">
+        <img src="images/market_concentration_2.png" alt="竞争格局分布图">
+        <p>竞争格局分布图</p>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
