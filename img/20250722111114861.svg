@@ -1,0 +1,105 @@
+<svg width="800" height="650" viewBox="0 0 800 650" xmlns="http://www.w3.org/2000/svg">
+    <!-- 
+      医疗生态系统合作网络
+      作者: Gemini
+      日期: 2025-07-21
+    -->
+    <style>
+        .link {
+            stroke: #b0b0b0;
+            stroke-opacity: 0.6;
+        }
+        .node-circle {
+            stroke: #fff;
+            stroke-width: 2.5px;
+        }
+        .label {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            text-anchor: middle;
+            fill: #1a202c;
+        }
+        .label-halo {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            text-anchor: middle;
+            stroke: #ffffff;
+            stroke-width: 4px;
+            stroke-linejoin: round;
+        }
+    </style>
+    
+    <rect width="100%" height="100%" fill="#ffffff"/>
+
+    <!-- Render Links -->
+    <g class="links">
+        <line class="link" x1="400" y1="325" x2="670" y2="325" stroke-width="2.8"></line>
+        <line class="link" x1="400" y1="325" x2="572" y2="530" stroke-width="2.6"></line>
+        <line class="link" x1="400" y1="325" x2="345" y2="565" stroke-width="2.4"></line>
+        <line class="link" x1="400" y1="325" x2="180" y2="425" stroke-width="2.2"></line>
+        <line class="link" x1="400" y1="325" x2="228" y2="120" stroke-width="2.5"></line>
+        <line class="link" x1="400" y1="325" x2="480" y2="85" stroke-width="2.3"></line>
+        <line class="link" x1="400" y1="325" x2="640" y2="150" stroke-width="2.0"></line>
+        <line class="link" x1="670" y1="325" x2="480" y2="85" stroke-width="2.5"></line>
+        <line class="link" x1="670" y1="325" x2="228" y2="120" stroke-width="2.3"></line>
+        <line class="link" x1="572" y1="530" x2="228" y2="120" stroke-width="2.4"></line>
+        <line class="link" x1="345" y1="565" x2="228" y2="120" stroke-width="2.2"></line>
+        <line class="link" x1="345" y1="565" x2="670" y2="325" stroke-width="2.0"></line>
+        <line class="link" x1="180" y1="425" x2="670" y2="325" stroke-width="1.8"></line>
+        <line class="link" x1="180" y1="425" x2="480" y2="85" stroke-width="2.0"></line>
+    </g>
+
+    <!-- Render Nodes and Labels -->
+    <g class="nodes">
+        <!-- Node: 医疗大模型 (center) -->
+        <g transform="translate(400, 325)">
+            <circle class="node-circle" r="28" fill="#003B35"></circle>
+            <text class="label-halo" y="46">医疗大模型</text>
+            <text class="label" y="46">医疗大模型</text>
+        </g>
+        <!-- Node: 医院 (hospital) -->
+        <g transform="translate(670, 325)">
+            <circle class="node-circle" r="22" fill="#FFA858"></circle>
+            <text class="label-halo" y="40">医院</text>
+            <text class="label" y="40">医院</text>
+        </g>
+        <!-- Node: 技术伙伴 (tech) -->
+        <g transform="translate(572, 530)">
+            <circle class="node-circle" r="18" fill="#5470C6"></circle>
+            <text class="label-halo" y="36">技术伙伴</text>
+            <text class="label" y="36">技术伙伴</text>
+        </g>
+        <!-- Node: 医药企业 (pharma) -->
+        <g transform="translate(345, 565)">
+            <circle class="node-circle" r="16" fill="#91CC75"></circle>
+            <text class="label-halo" y="34">医药企业</text>
+            <text class="label" y="34">医药企业</text>
+        </g>
+        <!-- Node: 保险公司 (insurance) -->
+        <g transform="translate(180, 425)">
+            <circle class="node-circle" r="14" fill="#FAC858"></circle>
+            <text class="label-halo" y="32">保险公司</text>
+            <text class="label" y="32">保险公司</text>
+        </g>
+        <!-- Node: 科研机构 (research) -->
+        <g transform="translate(228, 120)">
+            <circle class="node-circle" r="15" fill="#EE6666"></circle>
+            <text class="label-halo" y="33">科研机构</text>
+            <text class="label" y="33">科研机构</text>
+        </g>
+        <!-- Node: 患者 (patient) -->
+        <g transform="translate(480, 85)">
+            <circle class="node-circle" r="17" fill="#FFA858"></circle>
+            <text class="label-halo" y="35">患者</text>
+            <text class="label" y="35">患者</text>
+        </g>
+        <!-- Node: 监管机构 (regulator) -->
+        <g transform="translate(640, 150)">
+            <circle class="node-circle" r="12" fill="#73C0DE"></circle>
+            <text class="label-halo" y="30">监管机构</text>
+            <text class="label" y="30">监管机构</text>
+        </g>
+    </g>
+</svg>
